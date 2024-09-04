@@ -1,0 +1,25 @@
+nav{
+    background-color: #343a40;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    color: white;
+}
+
+.dropdown-menu {
+    background-color: #343a40;
+    color: white;
+}
+
+.dropdown-menu > li > a:hover {
+    background-image: none;
+    background-color: red;
+    color: white;
+}
+
+#navbarNavDropdown{
+    margin-left: 2rem;
+}
+
+.navbar-toggler{
+    background-color: white;
+}
+
