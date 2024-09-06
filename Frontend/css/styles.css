@@ -1,5 +1,6 @@
 /* styles.css */
 
+
 /* Estilos generales para todo el sitio */
 body,
 html {
@@ -535,6 +536,14 @@ section,
   transition: 0.3s;
 }
 
+.portfolio-info{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-content: center;
+}
+
+
 .portfolio .portfolio-content .portfolio-info {
   opacity: 0;
   position: absolute;
@@ -554,37 +563,27 @@ section,
   background-color: var(--accent-color);
 }
 
-.portfolio .portfolio-content .portfolio-info p {
-  position: absolute;
-  bottom: 10px;
-  text-align: center;
-  display: inline-block;
-  left: 0;
-  right: 0;
-  font-size: 16px;
-  font-weight: 600;
-  color: rgba(255, 255, 255, 0.8);
-}
 
 .portfolio .portfolio-content .portfolio-info .preview-link,
 .portfolio .portfolio-content .portfolio-info .details-link {
+  display: inline-block;
   position: absolute;
-  left: calc(50% - 40px);
   font-size: 26px;
-  top: calc(50% - 14px);
   color: #fff;
   transition: 0.3s;
   line-height: 1.2;
 }
 
+
 .portfolio .portfolio-content .portfolio-info .preview-link:hover,
 .portfolio .portfolio-content .portfolio-info .details-link:hover {
-  color: var(--accent-color);
+  color: red;
 }
 
 .portfolio .portfolio-content .portfolio-info .details-link {
-  left: 50%;
-  font-size: 34px;
+  left: 45%;
+  top: 40%;
+  font-size: 45px;
   line-height: 0;
 }
 
