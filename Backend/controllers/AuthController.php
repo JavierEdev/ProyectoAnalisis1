@@ -20,6 +20,10 @@ class AuthController {
         $this->user->id_condo = $data['id_condo'];
         $this->user->token_condominio = $data['token_condominio'];
 
+        if ($this->user->isEmailExists()) {
+            Response::send(400, ['message' => 'Email ya existe']);
+            return;
+        }
         // Llamada al método `create` solo una vez
         $resultado = $this->user->create();
 
@@ -28,6 +32,20 @@ class AuthController {
             Response::send(201, ['message' => 'Usuario registrado exitosamente']);
         } else {
             Response::send(500, ['message' => 'Error desconocido']);
+        }
+    }
+
+    public function login($data) {
+        $this->user->email = $data['email'];
+        $this->user->contrasena = $data['contrasena'];
+        $user_data = $this->user->authenticate();
+
+        if ($user_data) {
+            $auth = new AuthMiddleware($this->db);
+            $token = $auth->createToken($user_data['id_usuario']);
+            Response::send(200, ['message' => 'Login creado', 'token' => $token, 'id_user' => $user_data['id_usuario']]);
+        } else {
+            Response::send(401, ['message' => 'Credenciales invalidas']);
         }
     }
 }

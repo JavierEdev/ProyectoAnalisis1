@@ -2,6 +2,7 @@
 include_once 'config/db.php';
 include_once 'helpers/Response.php';
 include_once 'controllers/AuthController.php';
+include_once 'middleware/AuthMiddleware.php';
 
 $method = $_SERVER['REQUEST_METHOD'];
 $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
@@ -15,7 +16,12 @@ switch ($uri[3]) {
         if ($method === 'POST' && $uri[4] === 'register') {
             $data = json_decode(file_get_contents("php://input"), true);
             $authController->register($data);
-        } else {
+        }
+        elseif($method === 'POST' && $uri[4] === 'login'){
+            $data = json_decode(file_get_contents("php://input"), true);
+            $authController->login($data);
+        }
+        else {
             Response::send(405, ['message' => 'Method not allowed']);
         }
         break;
