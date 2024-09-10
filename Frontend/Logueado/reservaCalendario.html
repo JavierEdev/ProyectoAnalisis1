@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Reserva calendario</title>
+
+    <meta charset="utf-8">
+    <meta name="description" content="Simple Modern-looking Event Calendar Plugin">
+    <meta name="keywords" content="jQuery, Plugin, Event, Calendar, EvoCalendar">
+    <meta name="author" content="Edlyn Villegas">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <link rel="icon" href="favicon.png">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="../css/evo-calendar.min.css">
+    <link rel="stylesheet" type="text/css" href="../css/evo-calendar.midnight-blue.min.css">
+    <link rel="stylesheet" type="text/css" href="../css/demo.css">
+    <link rel="stylesheet" href="../css/navbar.css">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/reservaCalendario.css">
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Mono&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <main>
+
+        <nav class="navbar  navbar-expand-md justify-content-start">
+            <div class="container-fluid">
+              <a class="navbar-brand" style="color: white;"></a>
+                Residencial
+              </a>
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                      <a class="nav-link active pruebaa" aria-current="page" href="#" style="color: white;">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="#" style="color: white;">Sobre Nosotros</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="#" style="color: white;">Amenidades</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="#" style="color: white;">Contacto</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                      <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: white;">
+                        <i class="bi bi-person-circle"></i>
+                      </a>
+                      <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">Action</a></li>
+                        <li><a class="dropdown-item" href="#">Another action</a></li>
+                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+                      </ul>
+                    </li>
+                </ul>
+              </div>
+            </div>
+          </nav>
+        <main>
+
+        <section id="calendario">
+            <h1>NOMBRE DEL LUGAR A RESERVAR</h1>
+
+            <div>
+                En este calendario puedes ver las reservas actuales
+                Abajo del calendario se encuentra un formulario para hacer una reserva
+            </div>
+
+            <div class="log-content">
+                <div class="--noshadow" id="demoEvoCalendar"></div>
+            </div>
+            
+        </section>
+
+        <section id="reservaStyles">
+            <h2>Haz tu Reserva</h2>
+            <form id="formStyles">
+                <div class="mb-3">
+                <label for="espacio" class="form-label">Nombre del lugar</label>
+                <input type="email" class="form-control" id="espacio" aria-describedby="emailHelp" readonly>
+                </div>
+                <div class="mb-3">
+                <label for="fecha_reserva" class="form-label">Fecha</label>
+                <input type="date" class="form-control" id="fecha_reserva">
+                </div>
+
+                <label for="fecha-entrada" class="form-label">Hora de entrada</label>
+                <select class="form-select" aria-label="Default select example" id="fecha-entrada">
+                    <option selected>00:00</option>
+                    <option value="1">9:00 AM</option>
+                    <option value="2">10:00 AM</option>
+                    <option value="3">11:00 AM</option>
+                    <option value="4">12:00 PM</option>
+                    <option value="5">1:00 PM</option>
+                    <option value="6">2:00 PM</option>
+                    <option value="7">3:00 PM</option>
+                    <option value="8">4:00 PM</option>
+                    <option value="9">5:00 PM</option>
+                </select>
+                <label for="fecha-salida" class="form-label">Hora de salida</label>
+                <select class="form-select" aria-label="Default select example" id="fecha-salida">
+                    <option selected>00:00</option>
+                    <option value="1">9:00 AM</option>
+                    <option value="2">10:00 AM</option>
+                    <option value="3">11:00 AM</option>
+                    <option value="4">12:00 PM</option>
+                    <option value="5">1:00 PM</option>
+                    <option value="6">2:00 PM</option>
+                    <option value="7">3:00 PM</option>
+                    <option value="8">4:00 PM</option>
+                    <option value="9">5:00 PM</option>
+                </select>
+                
+                <div class="mb-3 form-check">
+                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                <label class="form-check-label" for="exampleCheck1">He leido los terminos y condiciones</label>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </section>
+
+       </main>
+
+        <footer class="login-footer bg-dark text-white py-4">
+            <div class="container text-center">
+                <p class="mb-3">&copy; 2024 Empresa. Todos los derechos reservados.</p>
+                <div class="login-social-icons">
+                    <a href="#" class="text-white me-3"><i class="bi bi-twitter"></i></a>
+                    <a href="#" class="text-white me-3"><i class="bi bi-facebook"></i></a>
+                    <a href="#" class="text-white me-3"><i class="bi bi-instagram"></i></a>
+                    <a href="#" class="text-white"><i class="bi bi-linkedin"></i></a>
+                </div>
+            </div>
+        </footer>
+
+    </main>
+    <footer>
+    <!-- jQuery y calendario-->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+    <script src="../js/evo-calendar.js"></script>
+    <script src="../js/demo.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

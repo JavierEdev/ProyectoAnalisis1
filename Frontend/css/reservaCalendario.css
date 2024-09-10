@@ -1,0 +1,29 @@
+#formStyles{
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    background-color: white;
+    max-width: 40rem;
+    width: 80vw;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    border-radius: 1rem;
+    padding: 3rem;
+}
+
+#reservaStyles{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#calendario{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.log-content{
+    width: 100vw;
+    max-width: 1090px;
+}
