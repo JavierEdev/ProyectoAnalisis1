@@ -4,22 +4,67 @@ nav{
     color: white;
 }
 
+/* Estilos para el menú desplegable */
 .dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
     background-color: #343a40;
-    color: white;
+    display: none; /* Oculto por defecto */
+    flex-direction: column;
+    padding: 0px 0px;
+    width: 10rem;
+    list-style: none;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+  
+.dropdown-menu li a {
+    padding: 0.5rem 0px;
+    color: #fff;
+    text-decoration: none;
 }
 
-.dropdown-menu > li > a:hover {
-    background-image: none;
-    background-color: red;
-    color: white;
+.dropdown-menu li a:hover {
+    background-color: greenyellow;
 }
 
-#navbarNavDropdown{
-    margin-left: 2rem;
+.d-none {
+    display: none !important;
+}
+  
+.dropdown-menu.show {
+    display: flex !important; /* Muestra el dropdown cuando está activo */
 }
 
-.navbar-toggler{
-    background-color: white;
+.animacionUnderline{
+    position: relative;
 }
 
+.animacionUnderline::after {
+    content: '';
+    opacity: 0;
+    transition: all 0.3s;
+    height: 2px;
+    width: 100%;
+    background-color: greenyellow;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
+.animacionUnderline:hover::after {
+    opacity: 1;
+}
+
+#navbarTituloStyles{
+    margin-right: 2rem;
+    transform: scale(1.0);
+    transition: transform 0.3s ease-in;
+}
+
+#navbarTituloStyles:hover{
+    margin-right: 2rem;
+    transform: scale(1.1);
+    transition: transform 0.3s ease-in;
+}

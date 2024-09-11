@@ -81,28 +81,41 @@ $(document).ready(function() {
         calendarEvents: [
           {
             id: "9jU6g6f",
-            name: "PRUEBA NUMERO 1",
-            description: "Celebracion de la independencia de Guatemala",
+            name: "Reserva1",
+            description: "de 10:00 a 11:00",
             date: "09/15/2024",
-            type: "holiday"
+            type: "holiday",
           },
 
           {
             id: "9jU6g6f",
-            name: "PRUEBA NUMERO 2",
-            description: "Celebracion de la independencia de Guatemala",
+            name: "Reserva 1",
+            description: "de 10:00 a 11:00",
             date: "09/17/2024",
             type: "holiday"
           },
 
           {
             id: "9jU6g6f",
-            name: "PRUEBA NUMERO 2",
-            description: "Celebracion de la independencia de Guatemala",
+            name: "Reserva 1",
+            description: "de 10:00 a 11:00",
             date: "09/18/2024",
             type: "holiday"
           },
-
+          {
+            id: "9jU6g6f",
+            name: "Reserva 2",
+            description: "de 10:00 a 11:00",
+            date: "09/18/2024",
+            type: "event"
+          },
+          {
+            id: "9jU6g6f",
+            name: "Reserva 3",
+            description: "de 11:00 a 12:00",
+            date: "09/18/2024",
+            type: "birthday"
+          }
           ]
     });
     $("[data-set-theme]").click(function(b) {
@@ -154,8 +167,10 @@ $(document).ready(function() {
         var b = $(a.target).closest("[data-event]");
         var c = b.data().event;
         showEventSample(c);
-    });
+    });   
 });
+
+
 
 function showSettingsSample(a) {
     var b = $("#event-settings");
@@ -306,3 +321,5 @@ $('[data-go*="#"]').on("click", function(a) {
         scrollTop: c
     }, 500);
 });
+
+
