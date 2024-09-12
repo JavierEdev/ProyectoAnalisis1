@@ -45,7 +45,7 @@ class AuthMiddleware {
 
             // Si la sesión es válida, retornar los datos del usuario
             if ($session) {
-                return $session['user_id'];
+                return $session['usr_id'];
             } else {
                 Response::send(401, ['message' => 'Invalid or expired token']);
             }
