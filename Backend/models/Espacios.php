@@ -4,6 +4,7 @@ class Espacio {
     private $table = 'espacios';
 
     public $id_espacio;
+    public $id_condo;
     public $nombre;
     public $descripcion;
     public $ubicacion;
@@ -32,18 +33,58 @@ class Espacio {
         return $stmt;
     }
 
-    public function update_espacio(){
-        $query = "UPDATE " . $this->table . " SET nombre = :nombre, descripcion = :descripcion, ubicacion = :ubicacion, mantenimiento = :mantenimiento WHERE id_espacio = :id_espacio";
+    public function update_espacio($id_condo,$id_espacio,$data){
+        $query = "UPDATE " . $this->table . " SET nombre = :nombre, descripcion = :descripcion, ubicacion = :ubicacion, mantenimiento = :mantenimiento 
+        WHERE id_espacio = :id_espacio
+        AND condominio = :condominio";
         $stmt = $this->conn->prepare($query);
-        $stmt->bindParam(':nombre', $this->nombre);
-        $stmt->bindParam(':descripcion', $this->descripcion);
-        $stmt->bindParam(':ubicacion', $this->ubicacion);
-        $stmt->bindParam(':mantenimiento', $this->mantenimiento);
-        $stmt->bindParam(':id_espacio', $this->id_espacio);
+        $stmt->bindParam(':nombre', $data['nombre']);
+        $stmt->bindParam(':descripcion', $data['descripcion']);
+        $stmt->bindParam(':ubicacion', $data['ubicacion']);
+        $stmt->bindParam(':mantenimiento', $data['mantenimiento']);
+        $stmt->bindParam(':id_espacio', $id_espacio);
+        $stmt->bindParam(':condominio', $id_condo);
         if ($stmt->execute()) {
             return true;
         }
         return false;
     }
+
+    public function insert_espacio ($data){
+        $query = "INSERT INTO " . $this->table . " (nombre,descripcion,ubicacion,mantenimiento,estado,condominio) 
+        VALUES (:nombre,:descripcion,:ubicacion,:mantenimiento,1,:condominio)";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':nombre', $data['nombre']);
+        $stmt->bindParam(':descripcion', $data['descripcion']);
+        $stmt->bindParam(':ubicacion', $data['ubicacion']);
+        $stmt->bindParam(':mantenimiento', $data['mantenimiento']);
+        $stmt->bindParam(':condominio', $data['id_condo']);
+        if ($stmt->execute()) {
+            return true;
+        }
+        return false;
+    }
+
+    public function delete_espacio($data) {
+        $query = "UPDATE " . $this->table . " SET estado = 2
+                  WHERE id_espacio = :id_espacio
+                  AND condominio = :condominio";
+    
+        $stmt = $this->conn->prepare($query);
+    
+        $stmt->bindParam(':id_espacio', $data['id_espacio']);
+        $stmt->bindParam(':condominio', $data['id_condo']);
+    
+        try {
+            if ($stmt->execute()) {
+                return true;
+            }
+        } catch (PDOException $e) {
+            echo "Error al ejecutar la consulta: " . $e->getMessage();
+        }
+    
+        return false;
+    }
+    
 }
 ?>

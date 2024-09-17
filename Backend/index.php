@@ -28,6 +28,21 @@ switch ($uri[4]) {
                 $data = json_decode(file_get_contents("php://input"), true);
                 $espacioController->getEspacioById($data);
             }
+
+            if ($method === 'PUT' && $uri[5] === 'updateIdEspacio') {
+                $data = json_decode(file_get_contents('php://input'), true);
+                $espacioController->updateEspacioById($data['id_condo'],$data['id_espacio'], $data);
+            }
+    
+            if ($method === 'POST' && $uri[5] === 'insertIdEspacio') {
+                $data = json_decode(file_get_contents('php://input'), true);
+                $espacioController->insertEspacioById($data);
+            }
+
+            if ($method === 'DELETE' && $uri[5] === 'deleteIdEspacio') {
+                $data = json_decode(file_get_contents('php://input'), true);
+                $espacioController->deleteEspacioById($data);
+            }
         }
         break;
 
