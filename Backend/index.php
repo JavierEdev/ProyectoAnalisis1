@@ -11,7 +11,7 @@ $uri = explode('/', $uri);
 
 $db = (new DB())->getConnection();
 
-switch ($uri[3]) {
+switch ($uri[4]) {
     case 'espacios':
         $authMiddleware = new AuthMiddleware($db);
         $user_id = $authMiddleware->authenticate();
@@ -19,12 +19,12 @@ switch ($uri[3]) {
         if($user_id){
             $espacioController = new EspaciosController($db);
 
-            if ($method === 'GET' && !isset($uri[4])) {
+            if ($method === 'GET' && !isset($uri[5])) {
                 $data = json_decode(file_get_contents("php://input"), true);
                 $espacioController->getAllEspacios($data);
             }
 
-            if ($method === 'GET' && $uri[4] === 'idEspacio') {
+            if ($method === 'GET' && $uri[5] === 'idEspacio') {
                 $data = json_decode(file_get_contents("php://input"), true);
                 $espacioController->getEspacioById($data);
             }
@@ -33,11 +33,11 @@ switch ($uri[3]) {
 
     case 'auth':
         $authController = new AuthController($db);
-        if ($method === 'POST' && $uri[4] === 'register') {
+        if ($method === 'POST' && $uri[5] === 'register') {
             $data = json_decode(file_get_contents("php://input"), true);
             $authController->register($data);
         }
-        elseif($method === 'POST' && $uri[4] === 'login'){
+        elseif($method === 'POST' && $uri[5] === 'login'){
             $data = json_decode(file_get_contents("php://input"), true);
             $authController->login($data);
         }
