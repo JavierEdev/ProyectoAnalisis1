@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", function () {
             contrasena: formData.get('password')
         };
 
-        fetch('http://localhost/ProyectoAnalisis1-main/Backend/index.php/auth/login', {
+        fetch('http://localhost/ProyectoAnalisis1/Backend/index.php/auth/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

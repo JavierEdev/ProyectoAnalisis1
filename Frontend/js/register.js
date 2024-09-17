@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", function () {
             token_condominio: formData.get('token')
         };
 
-        fetch('http://localhost/ProyectoAnalisis1-main/Backend/index.php/auth/register', {
+        fetch('http://localhost/ProyectoAnalisis1/Backend/index.php/auth/register', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

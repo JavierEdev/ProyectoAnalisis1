@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", function () {
         return;
     }
 
-    fetch('http://localhost/ProyectoAnalisis1-main/Backend/condo.php')
+    fetch('http://localhost/ProyectoAnalisis1/Backend/condo.php')
         .then(response => {
             console.log("Respuesta recibida, convirtiendo a JSON...");
             return response.json();
