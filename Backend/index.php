@@ -19,12 +19,12 @@ switch ($uri[4]) {
         if($user_id){
             $espacioController = new EspaciosController($db);
 
-            if ($method === 'GET' && !isset($uri[5])) {
+            if ($method === 'POST' && !isset($uri[5])) {
                 $data = json_decode(file_get_contents("php://input"), true);
                 $espacioController->getAllEspacios($data);
             }
 
-            if ($method === 'GET' && $uri[5] === 'idEspacio') {
+            if ($method === 'POST' && $uri[5] === 'idEspacio') {
                 $data = json_decode(file_get_contents("php://input"), true);
                 $espacioController->getEspacioById($data);
             }
