@@ -24,7 +24,7 @@ class AuthController {
             Response::send(400, ['message' => 'Email ya existe']);
             return;
         }
-        // Llamada al método `create` solo una vez
+        // Llamada al método create solo una vez
         $resultado = $this->user->create();
 
         // Manejo de la respuesta basado en el resultado
@@ -43,7 +43,7 @@ class AuthController {
         if ($user_data) {
             $auth = new AuthMiddleware($this->db);
             $token = $auth->createToken($user_data['id_usuario']);
-            Response::send(200, ['message' => 'Login creado', 'token' => $token, 'id_user' => $user_data['id_usuario'], 'user_name' => $user_data['nombre'], 'id_condo' => $user_data['condominio']]);
+            Response::send(200, ['message' => 'Login creado', 'token' => $token, 'id_user' => $user_data['id_usuario'], 'user_name' => $user_data['nombre'], 'id_condo' => $user_data['condominio'], 'id_rol' => $user_data['rol']]);
         } else {
             Response::send(401, ['message' => 'Credenciales invalidas']);
         }

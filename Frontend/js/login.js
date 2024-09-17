@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", function () {
             contrasena: formData.get('password')
         };
 
-        fetch('http://localhost/ProyectoAnalisis1/Backend/index.php/auth/login', {
+        fetch('http://localhost/ProyectoAnalisis1-main/Backend/index.php/auth/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -20,12 +20,17 @@ document.addEventListener("DOMContentLoaded", function () {
         .then(response => response.json())
         .then(result => {
             if (result.message === 'Login creado') {
-                alert('SesiÃ³n iniciada');
+                alert('Sesión iniciada');
                 localStorage.setItem('token', result.token);
                 localStorage.setItem('idUsuario', result.id_user);
                 localStorage.setItem('idCondo', result.id_condo);
                 localStorage.setItem('userName', result.user_name);
-                window.location.href = 'Logueado/index2.html';
+                localStorage.setItem('id_Rol', result.id_rol);
+                if(result.id_rol==1){
+                    window.location.href = 'Adminsitrador/index3.html';
+                }else if (result.id_rol==3){
+                    window.location.href = 'Logueado/index2.html';
+                }
             } else {
                 alert(result.message || 'Error desconocido');
             }
