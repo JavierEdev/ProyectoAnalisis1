@@ -20,7 +20,7 @@
 <body>
     <nav class="navbar navbar-expand-md justify-content-start">
         <div class="container-fluid">
-        <a class="navbar-brand" style="color: white;"></a>
+        <a class="navbar-brand" href="espaciosAdmin.html" style="color: white;">
             Residencial
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -35,7 +35,7 @@
                     <a class="nav-link" href="#" style="color: white;">Calendario</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#" style="color: white;">Espacios</a>
+                    <a class="nav-link" href="espaciosAdmin.html" style="color: white;">Espacios</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#" style="color: white;">Reservas</a>
@@ -45,12 +45,11 @@
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: white;">
+                        <label for="bi bi-person-circle " class="username" id="username">C</label>
                         <i class="bi bi-person-circle"></i>
                     </a>
                 <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="#">Action</a></li>
-                    <li><a class="dropdown-item" href="#">Another action</a></li>
-                    <li><a class="dropdown-item" href="#">Something else here</a></li>
+                    <li><a class="dropdown-item" href="index3.html">Vista Residente</a></li>
                 </ul>
                 </li>
             </ul>
@@ -66,52 +65,40 @@
                 <table id="example" class="table table-striped" style="width:100%">
 
                     <!-- 
-                       AGREGAR LOS NOMBRES DE LAS COLUMNAS DE LA BASE DE DATOS
+                        AGREGAR LOS NOMBRES DE LAS COLUMNAS DE LA BASE DE DATOS
 
-                       TAMBIEN CAMBIAR LOS NOMBRES EN EL "TFOT", SE ENCUENTRA DESPUES DEL "TBODY"
+                        TAMBIEN CAMBIAR LOS NOMBRES EN EL "TFOT", SE ENCUENTRA DESPUES DEL "TBODY"
                     -->
                     
                         <thead>
                             <tr>
-                                <th>Id</th>
                                 <th>Nombre</th>
                                 <th>Descripción</th>
                                 <th>Ubicación</th>
                                 <th>Mantenimiento</th>
                                 <th>Estado</th>    
                                 <th>Condominio</th>
+                                <th>Opciones</th>
                             </tr>
                         </thead>
+                            <!-- 
+                                AQUI (dentro del tbody) VA EL FOR EACH PARA MOSTRAR LOS DATOS DE LA BASE DE DATOS
+                                BORRAR TODOS LOS TR DE EJEMPLO
+                            -->
                         <tbody>
-                                                  
-                        <!-- 
-                        AQUI (dentro del tbody) VA EL FOR EACH PARA MOSTRAR LOS DATOS DE LA BASE DE DATOS
-                        BORRAR TODOS LOS TR DE EJEMPLO
-                        -->
-                            <tr>
-                                <td>Tiger Nixon</td>
-                                <td>System Architect</td>
-                                <td>Edinburgh</td>
-                                <td>61</td>
-                                <td>2011-04-25</td>
-                                <td>$320,800</td>
-                                <td>
-                                    <a href="" class="btn btn-primary btn-sm">modificar</a>
-                                </td>
-                            </tr>
-                        
                     <!-- 
-                       AGREGAR LOS NOMBRES DE LAS COLUMNAS DE LA BASE DE DATOS
+                        AGREGAR LOS NOMBRES DE LAS COLUMNAS DE LA BASE DE DATOS
                     -->
+                        </tbody>
                         <tfoot>
                             <tr>
-                                <th>Id</th>
                                 <th>Nombre</th>
                                 <th>Descripción</th>
                                 <th>Ubicación</th>
                                 <th>Mantenimiento</th>
                                 <th>Estado</th>    
                                 <th>Condominio</th>
+                                <th>Opciones</th>
                             </tr>
                         </tfoot>
 
@@ -156,6 +143,8 @@
     <script defer src="https://cdn.datatables.net/responsive/3.0.2/js/dataTables.responsive.min.js"></script>
     
     <script defer src="../js/Tabla.js"></script>
-    
+    <script defer src="../js/espacio.js"></script>
+    <script defer src="../js/user.js"></script>
+
 </body>
 </html> 
