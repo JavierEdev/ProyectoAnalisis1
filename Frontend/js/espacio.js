@@ -6,8 +6,11 @@ document.addEventListener("DOMContentLoaded", function () {
     const token = localStorage.getItem('token');
 
     if (token) {
-        console.log("Id_Rol:", id_Rol); 
+        console.log("Id_Usuario:", idUsuario); 
         console.log("Id_Condo:", idCondo); 
+        console.log("Usuario:", userName); 
+        console.log("Id_Rol:", id_Rol); 
+        console.log("Token:", token); 
         document.getElementById('username').textContent = userName;
     } else {
         console.log("No se encontró el nombre de usuario en localStorage");
@@ -42,8 +45,6 @@ function populateTable(data) {
     const tableBody = document.querySelector('#example tbody');
     tableBody.innerHTML = ''; 
     
-
-    // espacio.id_espacio
     data.forEach(espacio => {
         const row = `
             <tr>
@@ -58,7 +59,7 @@ function populateTable(data) {
                     <a href="#" class="btn btn-primary btn-sm">Editar</a>
                 </td>
             </tr>
-        `;
+        `;// espacio.id_espacio
         tableBody.innerHTML += row;
     });
 }
