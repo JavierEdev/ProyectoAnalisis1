@@ -9,6 +9,7 @@
     <!--CSS -->
     <link href="../css/styles.css" rel="stylesheet">
     <link href="../css/navbar.css" rel="stylesheet">
+    <link href="../css/reservaCalendario.css" rel="stylesheet" >
     <!-- CSS Tabla Extraido de : https://datatables.net -->
     <link rel="stylesheet" href="https://cdn.datatables.net/2.0.5/css/dataTables.bootstrap5.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
@@ -58,53 +59,39 @@
         </div>
     </nav>
 
-    <main id="mainContenedor">
-        <div class="tablaStyles">
-                <h1 class="py-3">Espacios</h1>
-                <!-- TABLA PARA VER LA BASE DE DATOS -->
-            <div class="card p-4">
-                <table id="example" class="table table-striped" style="width:100%">
+    <main>
+        <section id="reservaStyles"></section>
+            <h2 id="esp">Revisar Espacio</h2>
 
-                    <!-- 
-                        AGREGAR LOS NOMBRES DE LAS COLUMNAS DE LA BASE DE DATOS
-                        TAMBIEN CAMBIAR LOS NOMBRES EN EL "TFOT", SE ENCUENTRA DESPUES DEL "TBODY"
-                    -->
-                    
-                        <thead>
-                            <tr>
-                                <th>Nombre</th>
-                                <th>Descripción</th>
-                                <th>Ubicación</th>
-                                <th>Mantenimiento</th>
-                                <th>Estado</th>    
-                                <th>Condominio</th>
-                                <th>Opciones</th>
-                            </tr>
-                        </thead>
-                            <!-- 
-                                AQUI (dentro del tbody) VA EL FOR EACH PARA MOSTRAR LOS DATOS DE LA BASE DE DATOS
-                                BORRAR TODOS LOS TR DE EJEMPLO
-                            -->
-                        <tbody>
-                    <!-- 
-                        AGREGAR LOS NOMBRES DE LAS COLUMNAS DE LA BASE DE DATOS
-                    -->
-                        </tbody>
-                        <tfoot>
-                            <tr>
-                                <th>Nombre</th>
-                                <th>Descripción</th>
-                                <th>Ubicación</th>
-                                <th>Mantenimiento</th>
-                                <th>Estado</th>    
-                                <th>Condominio</th>
-                                <th>Opciones</th>
-                            </tr>
-                        </tfoot>
-
-                </table>
-            </div>
-        </div>
+            <form id="formStyles">
+                <div class="mb-3">
+                    <label for="nombre" class="form-label">Nombre</label>
+                    <input type="text" name="nombre" class="form-control" id="nombre" readonly>
+                </div>
+                <div class="mb-3">
+                    <label for="descripcion" class="form-label">Descripción</label>
+                    <input type="text" name="descripcion" class="form-control" id="descripcion" readonly>
+                </div>
+                <div class="mb-3">
+                    <label for="ubicacion" class="form-label">Ubicación</label>
+                    <input type="text" class="form-control" name="ubicacion" id="ubicacion" readonly/>
+                </div>
+                <div class="mb-3">
+                    <label for="mantenimiento" class="form-label">En Mantenimiento</label>
+                    <input type="text" name="mantenimiento" class="form-control" id="mantenimiento" readonly>
+                </div>
+                <div class="mb-3">
+                    <label for="estado" class="form-label">Estado</label>
+                    <input type="text" name="estado" class="form-control" id="estado" readonly>
+                </div>
+                <!-- <div class="d-grid">
+                    <button type="submit" class="btn btn-primary">Registrarse</button>
+                </div> -->
+                <div class="text-center mt-3">
+                    <a href="espaciosAdmin.html" class="login-register-link">Regresar</a>
+                </div>
+            </form>
+        </section>
     </main>
 
     <footer class="login-footer bg-dark text-white py-4">
@@ -143,7 +130,7 @@
     <script defer src="https://cdn.datatables.net/responsive/3.0.2/js/dataTables.responsive.min.js"></script>
     
     <script defer src="../js/Tabla.js"></script>
-    <script defer src="../js/espacio.js"></script>
+    <script defer src="../js/viewEspacio.js"></script>
 
 </body>
 </html> 

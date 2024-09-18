@@ -55,11 +55,19 @@ function populateTable(data) {
                 <td>${espacio.estado}</td>
                 <td>${espacio.condominio}</td>
                 <td>
-                    <a href="espaciosIndividualAdmin.html" class="btn btn-primary btn-sm">Ver</a>
+                    <a href="espaciosIndividualAdmin.html" class="btn btn-primary btn-sm btn-ver" data-id="${espacio.id_espacio}">Ver</a>
                     <a href="#" class="btn btn-primary btn-sm">Editar</a>
                 </td>
             </tr>
-        `;// espacio.id_espacio
+        `;
         tableBody.innerHTML += row;
+    });
+
+    const botonesVer = document.querySelectorAll('.btn-ver');
+    botonesVer.forEach(boton => {
+        boton.addEventListener('click', function (event) {
+            const idEspacio = event.target.getAttribute('data-id');
+            localStorage.setItem('idEspacio', idEspacio);
+        });
     });
 }
