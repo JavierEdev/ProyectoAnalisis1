@@ -56,7 +56,7 @@ function populateTable(data) {
                 <td>${espacio.condominio}</td>
                 <td>
                     <a href="espaciosIndividualAdmin.html" class="btn btn-primary btn-sm btn-ver" data-id="${espacio.id_espacio}">Ver</a>
-                    <a href="#" class="btn btn-primary btn-sm">Editar</a>
+                    <a href="updateEspacio.html" class="btn btn-primary btn-sm btn-ver" data-id="${espacio.id_espacio}">Editar</a>
                 </td>
             </tr>
         `;
