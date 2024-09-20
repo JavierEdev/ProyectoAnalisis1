@@ -21,10 +21,9 @@ document.addEventListener("DOMContentLoaded", function() {
         },
         body: JSON.stringify({ id_condo: idCondo, id_espacio: idEspacio })
     })
-    .then(response => response.json())  // Convertir la respuesta a JSON
+    .then(response => response.json())
     .then(data => {
         if (data && data.length > 0) {
-            // Llenar el formulario con los datos del espacio
             llenarFormulario(data[0]);
         } else {
             console.log("No se encontraron datos del espacio.");
@@ -39,7 +38,7 @@ function llenarFormulario(espacio) {
     document.getElementById('ubicacion').value = espacio.ubicacion || '';
     if (espacio.estado==1){
         document.getElementById('estado').value = "Activo";
-    }else{
+    }else if (espacio.estado==2){
         document.getElementById('estado').value = "Deshabilitado";
     }
 
