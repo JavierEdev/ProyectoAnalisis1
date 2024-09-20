@@ -13,7 +13,6 @@ document.addEventListener("DOMContentLoaded", function () {
         console.log("No se encontró el nombre de usuario en localStorage");
     }
 
-    // Nueva función para obtener los datos del espacio
     if (idEspacio) {
         fetch(`http://localhost/ProyectoAnalisis1/Backend/index.php/espacios/idEspacio`, {
             method: 'POST',
@@ -26,14 +25,13 @@ document.addEventListener("DOMContentLoaded", function () {
         .then(response => response.json())
         .then(data => {
             if (data && data.length > 0) {
-                // Rellenar los campos del formulario con los datos obtenidos
-                const espacio = data[0];  // Acceder al primer objeto del array
+                const espacio = data[0];
                 console.log(espacio);
 
                 document.getElementById('nombre').value = espacio.nombre || '';
                 document.getElementById('descripcion').value = espacio.descripcion || '';
                 document.getElementById('ubicacion').value = espacio.ubicacion || '';
-                document.getElementById('mantenimiento').value = espacio.mantenimiento || '';
+                document.getElementById('mantenimiento').value = espacio.mantenimiento || '0';
             } else {
                 alert('No se pudieron cargar los detalles del espacio');
             }
