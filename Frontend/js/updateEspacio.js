@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 document.getElementById('nombre').value = espacio.nombre || '';
                 document.getElementById('descripcion').value = espacio.descripcion || '';
                 document.getElementById('ubicacion').value = espacio.ubicacion || '';
-                document.getElementById('mantenimiento').value = espacio.mantenimiento || '0';
+                document.getElementById('mantenimiento').value = espacio.mantenimiento || '1';
             } else {
                 alert('No se pudieron cargar los detalles del espacio');
             }
