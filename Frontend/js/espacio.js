@@ -45,6 +45,7 @@ function populateTable(data) {
     const tableBody = document.querySelector('#example tbody');
     tableBody.innerHTML = ''; 
     
+    // <td>${espacio.condominio}</td>
     data.forEach(espacio => {
         const row = `
             <tr>
@@ -53,11 +54,10 @@ function populateTable(data) {
                 <td>${espacio.ubicacion}</td>
                 <td>${espacio.mantenimiento}</td>
                 <td>${espacio.estado}</td>
-                <td>${espacio.condominio}</td>
                 <td>
                     <a href="espaciosIndividualAdmin.html" class="btn btn-primary btn-sm btn-ver" data-id="${espacio.id_espacio}">Ver</a>
                     <a href="updateEspacio.html" class="btn btn-primary btn-sm btn-ver" data-id="${espacio.id_espacio}">Editar</a>
-                    <a href="#" class="btn btn-primary">Hola</a>
+                    <a href="#" class="btn btn-primary">Deshabilitar</a>
                 </td>
             </tr>
         `;
