@@ -35,91 +35,18 @@ html {
   color: #f0f0f0;
 }
 
-.navmenu {
-  display: flex;
-  align-items: center;
-}
 
-.navmenu ul {
-  display: flex;
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.navmenu ul li {
-  margin-left: 7px;
-  position: relative; /* Necesario para el menú desplegable */
-}
-
-.navmenu ul li a {
-  font-family: "Nunito", sans-serif;
-  font-weight: 400;
-  font-size: 1rem;
-  color: #fff;
-  text-decoration: none;
-  padding: 8px 12px;
-  transition: color 0.3s, background-color 0.3s;
-}
-
-.navmenu ul li a:hover {
-  background-color: #007bff;
-  color: #fff;
-  border-radius: 4px;
-}
-
-.navmenu ul li a.active {
-  background-color: #007bff;
-  color: #fff;
-  border-radius: 4px;
-}
-
-
-/* Botón de menú para móviles */
-.mobile-nav-toggle {
-  font-size: 24px;
-  color: #fff;
-  cursor: pointer;
-  display: none;
-}
 
 @media (max-width: 991px) {
   .mobile-nav-toggle {
     display: block;
   }
 
-  .navmenu ul {
-    display: none; /* Oculta el menú por defecto en pantallas pequeñas */
-    flex-direction: column;
-    background-color: #343a40;
-    position: absolute;
-    top: 60px;
-    right: 0;
-    width: 200px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  }
-
-  .navmenu.active ul {
-    display: flex; /* Muestra el menú cuando se activa */
-  }
-
-  .dropdown-menu {
-    display: none; /* Oculta el dropdown por defecto en pantallas pequeñas */
-    position: relative;
-    top: 0;
-    box-shadow: none;
-  }
-
-  .dropdown-menu.show {
-    display: flex !important; /* Muestra el dropdown cuando está activo en móviles */
-  }
 }
 
 /* Asegura que el menú esté visible en pantallas grandes */
 @media (min-width: 992px) {
-  .navmenu ul {
-    display: flex !important;
-  }
+
 }
 
 
