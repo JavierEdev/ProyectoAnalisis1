@@ -1,0 +1,58 @@
+main{
+    background-color: white;
+}
+
+#reservaStyles{
+    padding-top: 11rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 0;
+    background-color: rgb(230, 230, 230);
+}
+#formStyles{
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    background-color: white;
+    max-width: 40rem;
+    width: 80vw;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    border-radius: 1rem;
+    padding: 3rem;
+}
+
+
+
+h1:before,
+h1:after {
+    content: "";
+    width: 50px;
+    height: 4px;
+    background: #343a40;
+    display: inline-block;
+}
+h1:before {
+    margin: 0 15px 8px 0;
+}
+  
+h1:after {
+    margin: 0 0 8px 15px;
+}
+
+h2:before,
+h2:after {
+    content: "";
+    width: 50px;
+    height: 4px;
+    background: #343a40;
+    display: inline-block;
+}
+h2:before {
+    margin: 0 15px 8px 0;
+}
+  
+h2:after {
+    margin: 0 0 8px 15px;
+}
+  

@@ -79,43 +79,7 @@ $(document).ready(function() {
         // En "calendarEvents" es donde se 
         // agregan mas eventos que se mostrarán en el calendario
         calendarEvents: [
-          {
-            id: "9jU6g6f",
-            name: "Reserva1",
-            description: "de 10:00 a 11:00",
-            date: "09/15/2024",
-            type: "holiday",
-          },
-
-          {
-            id: "9jU6g6f",
-            name: "Reserva 1",
-            description: "de 10:00 a 11:00",
-            date: "09/17/2024",
-            type: "holiday"
-          },
-
-          {
-            id: "9jU6g6f",
-            name: "Reserva 1",
-            description: "de 10:00 a 11:00",
-            date: "09/18/2024",
-            type: "holiday"
-          },
-          {
-            id: "9jU6g6f",
-            name: "Reserva 2",
-            description: "de 10:00 a 11:00",
-            date: "09/18/2024",
-            type: "event"
-          },
-          {
-            id: "9jU6g6f",
-            name: "Reserva 3",
-            description: "de 11:00 a 12:00",
-            date: "09/18/2024",
-            type: "birthday"
-          }
+       
           ]
     });
     $("[data-set-theme]").click(function(b) {
