@@ -20,15 +20,15 @@ nav{
     text-align: center  ;
     
 }
+
+.dropdown-menu li a:hover {
+    background-color: greenyellow;
+}
 .dropdown-item{
     color: white !important;
     text-align: center;
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
-}
-
-.dropdown-menu li a:hover {
-    background-color: greenyellow;
 }
 
 .d-none {

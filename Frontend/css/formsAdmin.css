@@ -3,12 +3,12 @@ main{
 }
 
 #reservaStyles{
-    padding-top: 11rem;
+    padding-top: 9rem;
+    padding-bottom: 5rem;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin-top: 0;
     background-color: rgb(230, 230, 230);
 }
 #formStyles{
@@ -21,8 +21,6 @@ main{
     border-radius: 1rem;
     padding: 3rem;
 }
-
-
 
 h1:before,
 h1:after {
