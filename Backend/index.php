@@ -96,6 +96,20 @@ switch ($uri[4]) {
             $data = json_decode(file_get_contents("php://input"), true);
             $authController->login($data);
         }
+        // Leer un usuario
+        elseif ($method === 'GET' && isset($uri[5]) ) {
+            $authController->read();
+        }
+        // Actualizar un usuario
+        elseif ($method === 'PUT' && isset($uri[5]) ) {
+            $data = json_decode(file_get_contents("php://input"), true);
+            $authController->update($data);
+        }
+        // Desactivar un usuario (Delete)
+        elseif ($method === 'DELETE' && isset($uri[5]) ) {
+            $data = json_decode(file_get_contents("php://input"), true);
+            $authController->delete($data);
+        }
         else {
             Response::send(405, ['message' => 'Method not allowed']);
         }

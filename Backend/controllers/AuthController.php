@@ -48,5 +48,32 @@ class AuthController {
             Response::send(401, ['message' => 'Credenciales invalidas']);
         }
     }
+
+    public function read() {
+    
+        $user_data = $this->user->read();
+    
+        if ($user_data) {
+            Response::send(200, ['message' => 'Usuario encontrado', 'data' => $user_data]);
+        } else {
+            Response::send(404, ['message' => 'Usuario no encontrado']);
+        }
+    }
+    
+    public function update($data) {
+        if ($this->user->update($data)) {
+            Response::send(200, ['message' => 'Usuario actualizado exitosamente']);
+        } else {
+            Response::send(500, ['message' => 'Error al actualizar el usuario']);
+        }
+    }
+    
+    public function delete($data) {
+        if ($this->user->delete($data)) {
+            Response::send(200, ['message' => 'Usuario desactivado exitosamente']);
+        } else {
+            Response::send(500, ['message' => 'Error al desactivar el usuario']);
+        }
+    }
 }
 ?>
