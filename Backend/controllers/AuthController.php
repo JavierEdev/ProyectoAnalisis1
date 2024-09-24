@@ -25,13 +25,13 @@ class AuthController {
             return;
         }
         // Llamada al método create solo una vez
-        $resultado = $this->user->create();
+        $resultado = $this->user->create($data);
 
         // Manejo de la respuesta basado en el resultado
         if ($resultado) {
             Response::send(201, ['message' => 'Usuario registrado exitosamente']);
         } else {
-            Response::send(500, ['message' => 'Error desconocido']);
+            Response::send(500, ['message' => 'Error desconocido || favor validar el usuario']);
         }
     }
 

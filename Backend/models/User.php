@@ -18,15 +18,16 @@ class User {
         $this->conn = $db;
     }
 
-    public function create() {
-
-        $consulta1 = "SELECT TRUE FROM condominios WHERE token_condo = :token_condominio AND id_condo = :id_condo";
+    public function create($data) {
+        $consulta1 = "SELECT token_condo FROM condominios WHERE id_condo = :id_condo";
         $queryEjecutar = $this->conn->prepare($consulta1);
+    
+        $queryEjecutar->bindParam(':id_condo', $data['id_condo']);
+        $queryEjecutar->execute();
+        
+        $resultado = $queryEjecutar->fetch(PDO::FETCH_ASSOC);
 
-        $queryEjecutar->bindParam(':token_condominio', $this->token_condominio);
-        $queryEjecutar->bindParam(':id_condo', $this->id_condo);
-
-        if ($queryEjecutar->execute()) {
+        if ($resultado && $resultado['token_condo'] === $data['token_condominio']) {
             $consulta2 = "INSERT INTO " . $this->table . " (nombre, apellido, email, contrasena, rol, condominio, estado) 
                           VALUES (:nombre, :apellido, :email, :contrasena, :rol, :condominio, 1)";
             $queryEjecutar2 = $this->conn->prepare($consulta2);
