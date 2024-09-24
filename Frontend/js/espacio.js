@@ -47,13 +47,17 @@ function populateTable(data) {
 
   // <td>${espacio.condominio}</td>
   data.forEach((espacio) => {
+    const estadoTexto = espacio.estado === 1 ? 'Activo' : 'Deshabilitado';
+    const estadoMantenimiento = espacio.mantenimiento === 1 ? 'No' : 'Si';
+    
     const row = `
+    
             <tr>
                 <td>${espacio.nombre}</td>
                 <td>${espacio.descripcion}</td>
                 <td>${espacio.ubicacion}</td>
-                <td>${espacio.mantenimiento}</td>
-                <td>${espacio.estado}</td>
+                <td>${estadoMantenimiento}</td>
+                <td>${estadoTexto}</td>
                 <td>
                     <a href="espaciosIndividualAdmin.html" class="btn btn-primary btn-sm btn-ver" data-id="${espacio.id_espacio}">Ver</a>
                     <a href="updateEspacio.html" class="btn btn-primary btn-sm btn-ver" data-id="${espacio.id_espacio}">Editar</a>
