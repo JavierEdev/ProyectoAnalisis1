@@ -2,8 +2,9 @@
 include_once 'config/db.php';
 include_once 'helpers/Response.php';
 include_once 'controllers/AuthController.php';
-include_once 'middleware/AuthMiddleware.php';
 include_once 'controllers/EspaciosController.php';
+include_once 'controllers/ReservasController.php';
+include_once 'middleware/AuthMiddleware.php';
 
 $method = $_SERVER['REQUEST_METHOD'];
 $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
@@ -45,6 +46,45 @@ switch ($uri[4]) {
             }
         }
         break;
+
+        case 'reservas':
+            $authMiddleware = new AuthMiddleware($db);
+            $user_id = $authMiddleware->authenticate();
+    
+            if($user_id){
+                $reservasController = new ReservasController($db);
+    
+                if ($method === 'POST' && !isset($uri[5])) {
+                    $data = json_decode(file_get_contents("php://input"), true);
+                    $reservasController->getAllReservas($data);
+                }
+    
+                if ($method === 'POST' && $uri[5] === 'idReserva') {
+                    $data = json_decode(file_get_contents("php://input"), true);
+                    $reservasController->getReservaById($data);
+                }
+                    
+                if ($method === 'POST' && $uri[5] === 'idUser') {
+                    $data = json_decode(file_get_contents("php://input"), true);
+                    $reservasController->getReservaByUserId($data);
+                }
+
+                if ($method === 'POST' && $uri[5] === 'insertReserva') {
+                    $data = json_decode(file_get_contents("php://input"), true);
+                    $reservasController->insertReserva($data);
+                }
+
+                if ($method === 'PUT' && $uri[5] === 'updateReserva') {
+                    $data = json_decode(file_get_contents("php://input"), true);
+                    $reservasController->updateReserva($data);
+                }
+
+                if ($method === 'DELETE' && $uri[5] === 'deleteReserva') {
+                    $data = json_decode(file_get_contents("php://input"), true);
+                    $reservasController->deleteReserva($data);
+                }
+            }
+            break;
 
     case 'auth':
         $authController = new AuthController($db);
