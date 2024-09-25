@@ -16,10 +16,11 @@ class Reservas {
     }
 
     public function read_all_reservas($data){
-        $query = "SELECT * FROM " . $this->table . " r 
-        INNER JOIN espacios e ON r.id_espacio = e.id_espacio 
-        WHERE e.condominio = :id_condo
-        AND estado = 1";
+        $query = "SELECT r.id_reservas, e.nombre, r.fecha_reserva, r.hora_inicio, r.hora_fin, concat(u.nombre, ' ', u.apellido) as usuario, r.estado 
+                    FROM  " . $this->table . " r 
+                    INNER JOIN pa2_q01.usuarios u ON r.usuario_reserva = u.id_usuario
+                    INNER JOIN espacios e ON r.id_espacio = e.id_espacio 
+                    WHERE e.condominio = :id_condo AND r.estado = 1";
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(':id_condo', $data);
         $stmt->execute();
@@ -35,7 +36,10 @@ class Reservas {
     }
 
     public function read_reserva_user($data){
-        $query = "SELECT * FROM " . $this->table . " WHERE usuario_reserva = :id_usuario AND estado = 1";
+        $query = "SELECT r.id_reservas, e.nombre, r.fecha_reserva, r.hora_inicio, r.hora_fin, r.usuario_reserva, r.estado FROM  " . $this->table . " r 
+                    INNER JOIN espacios e ON r.id_espacio = e.id_espacio
+                    INNER JOIN usuarios u ON r.usuario_reserva = u.id_usuario 
+                    WHERE r.usuario_reserva = :id_usuario AND r.estado = 1";
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(':id_usuario', $data['id_usuario']);
         $stmt->execute();
