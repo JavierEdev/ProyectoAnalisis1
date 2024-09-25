@@ -50,13 +50,12 @@ class AuthController {
     }
 
     public function read() {
-    
-        $user_data = $this->user->read();
-    
-        if ($user_data) {
-            Response::send(200, ['message' => 'Usuario encontrado', 'data' => $user_data]);
+        $users_data = $this->user->read();
+        
+        if ($users_data) {
+            Response::send(200, ['message' => 'Usuarios encontrados', 'data' => $users_data]);
         } else {
-            Response::send(404, ['message' => 'Usuario no encontrado']);
+            Response::send(404, ['message' => 'No se encontraron usuarios']);
         }
     }
     

@@ -51,13 +51,14 @@ class User {
 
     public function read() {
         $query = "SELECT * FROM " . $this->table . " ";
-
+        
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
-        $user = $stmt->fetch(PDO::FETCH_ASSOC);
-
-        if ($user) {
-            return $user;
+        
+        $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        
+        if ($users) {
+            return $users;
         }
         return false;
     }
