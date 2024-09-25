@@ -48,7 +48,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const row = `
             <tr>
                 <td>${reserva.id_reservas}</td>
-                <td>${reserva.id_espacio}</td>
+                <td>${reserva.nombre}</td>
                 <td>${reserva.fecha_reserva}</td>
                 <td>${reserva.hora_inicio}</td>
                 <td>${reserva.hora_fin}</td>
