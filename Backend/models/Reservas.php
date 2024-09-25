@@ -28,7 +28,11 @@ class Reservas {
     }
 
     public function read_single_reserva($data){
-        $query = "SELECT * FROM " . $this->table . " WHERE id_reservas = :id_reservas AND estado = 1 LIMIT 0,1";
+        $query = "SELECT r.id_reservas, e.nombre, r.fecha_reserva, r.hora_inicio, r.hora_fin, concat(u.nombre, ' ', u.apellido) as usuario, r.estado 
+                FROM " . $this->table . " r 
+                INNER JOIN pa2_q01.espacios e ON r.id_espacio = e.id_espacio
+                INNER JOIN pa2_q01.usuarios u ON r.usuario_reserva = u.id_usuario
+                WHERE id_reservas = :id_reservas";
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(':id_reservas', $data['id_reservas']);
         $stmt->execute();
