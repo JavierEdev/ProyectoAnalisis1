@@ -16,112 +16,110 @@ document.addEventListener("DOMContentLoaded", function () {
       console.log("No se encontró el nombre de usuario en localStorage");
     }
   
-  //   fetch("http://localhost/ProyectoAnalisis1/Backend/index.php/espacios", {
-  //     method: "POST",
-  //     headers: {
-  //       Authorization: `Bearer ${token}`,
-  //       "Content-Type": "application/json",
-  //     },
-  //     body: JSON.stringify({ id_condo: idCondo }),
-  //   })
-  //     .then((response) => {
-  //       if (!response.ok) {
-  //         throw new Error("Error en la solicitud");
-  //       }
-  //       return response.json();
-  //     })
-  //     .then((result) => {
-  //       console.log(result);
-  //       populateTable(result);
-  //     })
-  //     .catch((error) => {
-  //       console.error("Error al obtener los espacios:", error);
-  //       alert("Error al obtener los espacios.");
-  //     });
-  // });
+    fetch("http://localhost/ProyectoAnalisis1/Backend/index.php/auth/id_condo", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ id_condo: idCondo }),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Error en la solicitud");
+        }
+        return response.json();
+      })
+      .then((result) => {
+        console.log(result);
+        populateTable(result);
+      })
+      .catch((error) => {
+        console.error("Error al obtener los usuario:", error);
+        alert("Error al obtener los usuario.");
+      });
+  });
   
-  // // Llenar tabla del espaciosAdmin.html
-  // function populateTable(data) {
-  //   const tableBody = document.querySelector("#example tbody");
-  //   tableBody.innerHTML = "";
+  function populateTable(data) {
+    const tableBody = document.querySelector("#example tbody");
+    tableBody.innerHTML = "";
   
-  //   // <td>${espacio.condominio}</td>
-  //   data.forEach((espacio) => {
-  //     const estadoTexto = espacio.estado === 1 ? "Activo" : "Deshabilitado";
-  //     const estadoMantenimiento = espacio.mantenimiento === 1 ? "No" : "Si";
-  
-  //     const row = `
+    data.forEach((usuario) => {
+      const estadoTexto = usuario.estado === 1 ? "Activo" : "Inactivo";  
+      const rolTexto = usuario.rol === 1 ? "Administrador": usuario.rol === 2 ? "Colaborador": "Residente";
+      const row = `
         
-  //               <tr>
-  //                   <td>${espacio.nombre}</td>
-  //                   <td>${espacio.descripcion}</td>
-  //                   <td>${espacio.ubicacion}</td>
-  //                   <td>${estadoMantenimiento}</td>
-  //                   <td>${estadoTexto}</td>
-  //                   <td>
-  //                       <a href="espaciosIndividualAdmin.html" class="btn btn-primary btn-sm btn-ver" data-id="${espacio.id_espacio}">Ver</a>
-  //                       <a href="updateEspacio.html" class="btn btn-primary btn-sm btn-ver" data-id="${espacio.id_espacio}">Editar</a>
-  //                       <a href="#" class="btn btn-primary btn-delete" data-id="${espacio.id_espacio}">Deshabilitar</a>
-  //                   </td>
-  //               </tr>
-  //           `;
-  //     tableBody.innerHTML += row;
-  //   });
-  
-  //   const botonesVer = document.querySelectorAll(".btn-ver");
-  //   botonesVer.forEach((boton) => {
-  //     boton.addEventListener("click", function (event) {
-  //       const idEspacio = event.target.getAttribute("data-id");
-  //       localStorage.setItem("idEspacio", idEspacio);
-  //     });
-  //   });
-  
-  //   const botonesEliminar = document.querySelectorAll(".btn-delete");
-  //   botonesEliminar.forEach((boton) => {
-  //     boton.addEventListener("click", function (event) {
-  //       event.preventDefault();
-  //       const idEspacio = event.target.getAttribute("data-id");
-  //       if (
-  //         confirm(
-  //           "¿Estás seguro de que deseas deshabilitar este espacio id: " +
-  //             idEspacio +
-  //             "?"
-  //         )
-  //       ) {
-  //         eliminarEspacio(idEspacio);
-  //       }
-  //     });
-  //   });
-  // }
-  
-  // function eliminarEspacio(idEspacio) {
-  //   const token = localStorage.getItem("token");
-  //   const idCondo = localStorage.getItem("idCondo");
-  
-  //   fetch(
-  //     "http://localhost/ProyectoAnalisis1/Backend/index.php/espacios/deleteIdEspacio",
-  //     {
-  //       method: "DELETE",
-  //       headers: {
-  //         Authorization: `Bearer ${token}`,
-  //         "Content-Type": "application/json",
-  //       },
-  //       body: JSON.stringify({ id_condo: idCondo, id_espacio: idEspacio }),
-  //     }
-  //   )
-  //     .then((response) => {
-  //       if (!response.ok) {
-  //         throw new Error("Error al deshabilitar el espacio");
-  //       }
-  //       return response.json();
-  //     })
-  //     .then((result) => {
-  //       console.log(result);
-  //       alert("Espacio deshabilitado correctamente");
-  //       location.reload();
-  //     })
-  //     .catch((error) => {
-  //       console.error("Error al deshabilitar el espacio:", error);
-  //       alert("Error al deshabilitar el espacio.");
-  //     });
-});
+                <tr>
+                    <td>${usuario.id_usuario}</td>
+                    <td>${usuario.nombre}</td>
+                    <td>${usuario.apellido}</td>
+                    <td>${usuario.email}</td>
+                    <td>${usuario.creado_en}</td>
+                    <td>${rolTexto}</td>
+                    <td>${estadoTexto}</td>
+                    <td>
+                        <a href="usuarioIndividualAdmin.html" class="btn btn-primary btn-sm btn-ver" data-id="${usuario.id_usuario}">Ver</a>
+                        <a href="updateUsuario.html" class="btn btn-primary btn-sm btn-ver" data-id="${usuario.id_usuario}">Editar</a>
+                        <a href="#" class="btn btn-primary btn-delete" data-id="${usuario.id_usuario}">Desactivar</a>
+                    </td>
+                </tr>
+            `;
+            tableBody.innerHTML += row;
+          });
+        
+          const botonesVer = document.querySelectorAll(".btn-ver");
+          botonesVer.forEach((boton) => {
+            boton.addEventListener("click", function (event) {
+              const idRegistro = event.target.getAttribute("data-id");
+              localStorage.setItem("idRegistro", idRegistro);
+            });
+          });
+        
+          const botonesEliminar = document.querySelectorAll(".btn-delete");
+          botonesEliminar.forEach((boton) => {
+            boton.addEventListener("click", function (event) {
+              event.preventDefault();
+              const idRegistro = event.target.getAttribute("data-id");
+              if (
+                confirm(
+                  "¿Estás seguro de que deseas cambiar a Inactivo el usuario con ID: " +
+                  idRegistro +
+                    "?"
+                )
+              ) {
+                eliminarUsuario(idRegistro);
+              }
+            });
+          });
+        }
+        
+        function eliminarUsuario(idRegistro) {
+          const token = localStorage.getItem("token");
+        
+          fetch(
+            "http://localhost/ProyectoAnalisis1/Backend/index.php/auth/register",
+            {
+              method: "DELETE",
+              headers: {
+                Authorization: `Bearer ${token}`,
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({ id: idRegistro }),
+            }
+          )
+            .then((response) => {
+              if (!response.ok) {
+                throw new Error("Error al cambiar a Inactivo al usuario.");
+              }
+              return response.json();
+            })
+            .then((result) => {
+              console.log(result);
+              alert("Estado de usuario cambio a Inactivo");
+              location.reload();
+            })
+            .catch((error) => {
+              console.error("Error al cambiar a Inactivo al usuario:", error);
+              alert("Error al cambiar a Inactivo al usuario.");
+            });
+        }

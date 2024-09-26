@@ -3,6 +3,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const token = localStorage.getItem('token');
     const userName = localStorage.getItem('userName');
     const selectEspacio = document.getElementById('espacio');
+    const selectUsuario = document.getElementById('residente');
 
     if (token) {
         console.log("Id_Condo:", idCondo); 
@@ -18,6 +19,13 @@ document.addEventListener("DOMContentLoaded", function () {
         itemSelectText: '',
         placeholder: true, 
         placeholderValue: 'Seleccione un espacio',
+    });
+
+    const choices1 = new Choices(selectUsuario, {
+        searchEnabled: true,
+        itemSelectText: '',
+        placeholder: true, 
+        placeholderValue: 'Seleccione un residente',
     });
 
     fetch("http://localhost/ProyectoAnalisis1/Backend/index.php/espacios", {
@@ -46,6 +54,32 @@ document.addEventListener("DOMContentLoaded", function () {
         alert('Error al obtener los espacios.');
     });
 
+    fetch("http://localhost/ProyectoAnalisis1/Backend/index.php/auth/id_condo", {
+        method: "POST",
+        headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ id_condo: idCondo }),
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Error al obtener los usuarios');
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log(data); 
+        data.forEach(usuario => {
+            const option = { value: usuario.id_usuario, label: usuario.nombre };
+            choices1.setChoices([option], 'value', 'label', false);
+        });
+    })
+    .catch(error => {
+        console.error('Error al obtener los espacios:', error);
+        alert('Error al obtener los espacios.');
+    });
+
     // GUARDAR LA RESERVA HECHA POR EL ADMIN
     const form = document.getElementById("formStyles");
 
@@ -53,9 +87,10 @@ document.addEventListener("DOMContentLoaded", function () {
         e.preventDefault();
 
         const idEspacio = selectEspacio.value;
+        const idResidente = selectUsuario.value;
 
         const formData = {
-            id_usuario: document.getElementById("residente").value,
+            id_usuario: idResidente,
             id_espacio: idEspacio,
             fecha_reserva: document.getElementById("fecha_reserva").value,
             hora_inicio: document.getElementById("fecha-entrada").value,

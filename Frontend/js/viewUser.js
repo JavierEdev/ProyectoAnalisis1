@@ -2,24 +2,24 @@ document.addEventListener("DOMContentLoaded", function() {
     const idCondo = localStorage.getItem('idCondo');
     const token = localStorage.getItem('token');
     const userName = localStorage.getItem('userName');
-    const idReserva = localStorage.getItem('idReserva');
+    const idUser = localStorage.getItem('idRegistro');
 
     if (token) {
         console.log("Id_Condo:", idCondo); 
         console.log("Token:", token); 
-        console.log("Reserva:", idReserva); 
+        console.log("Usuario:", idUser); 
         document.getElementById('username').textContent = userName;
     } else {
         console.log("No se encontró el nombre de usuario en localStorage");
     }
 
-    fetch('http://localhost/ProyectoAnalisis1/Backend/index.php/reservas/idReserva', {
+    fetch('http://localhost/ProyectoAnalisis1/Backend/index.php/auth/id_usuario', {
         method: 'POST',
         headers: {
             'Authorization': `Bearer ${token}`,
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ id_reservas: idReserva })
+        body: JSON.stringify({ id_usuario: idUser })
     })
     .then(response => response.json())
     .then(data => {
@@ -33,16 +33,25 @@ document.addEventListener("DOMContentLoaded", function() {
     .catch(error => console.error('Error al obtener los datos del espacio:', error));
 });
 
-function llenarFormulario(reserva) {
-    document.getElementById('idReserva').value = reserva.id_reservas || '';
-    document.getElementById('espacio').value = reserva.nombre || '';
-    document.getElementById('user').value = reserva.usuario || '';
-    document.getElementById('fecha').value = reserva.fecha_reserva || '';
-    document.getElementById('horaIni').value = reserva.hora_inicio || '';
-    document.getElementById('horaFin').value = reserva.hora_fin || '';
-    if (reserva.estado==1){
+function llenarFormulario(user) {
+    document.getElementById('idUser').value = user.id_usuario || '';
+    document.getElementById('nombre').value = user.nombre || '';
+    document.getElementById('lastname').value = user.apellido || '';
+    document.getElementById('email').value = user.email || '';
+    document.getElementById('creado').value = user.creado_en || '';
+    if (user.rol==1){
+        document.getElementById('rol').value = "Administrador";
+    }
+    else if (user.rol==2){
+        document.getElementById('rol').value = "Colaborador";
+    }
+    else if (user.rol==3){
+        document.getElementById('rol').value = "Residente";
+    }
+    
+    if (user.estado==1){
         document.getElementById('estado').value = "Activo";
-    }else if (espacio.estado==2){
-        document.getElementById('estado').value = "Deshabilitado";
+    }else if (user.estado==2){
+        document.getElementById('estado').value = "Inactivo";
     }
 }
