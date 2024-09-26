@@ -60,7 +60,6 @@ class Reservas {
         $stmt->bindParam(':fecha_reserva', $data['fecha_reserva']);
         $stmt->bindParam(':hora_inicio', $data['hora_inicio']);
         $stmt->bindParam(':hora_fin', $data['hora_fin']);
-        $stmt->execute();
         if ($stmt->execute()) {
             return true;
         }
