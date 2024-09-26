@@ -79,7 +79,7 @@ document.addEventListener("DOMContentLoaded", function () {
               <img src="${imagenPath}" class="img-fluid" alt="${espacio.descripcion}">
               <div class="portfolio-info">
                 <h4>${espacio.nombre}: ${espacio.descripcion}</h4>
-                <a href="place-info3.html" title="More Details" class="details-link" data-id="${espacio.id_espacio}">
+                <a href="place-info2.html" title="More Details" class="details-link" data-id="${espacio.id_espacio}">
                   <i class="bi bi-plus"></i>
                 </a>
               </div>
