@@ -67,12 +67,8 @@ class AuthController {
 
     public function getUserById($data) {
         $stmt = $this->user->getUserById($data);
-        $userResponse = $stmt->fetch(PDO::FETCH_ASSOC);
-        if ($userResponse) {
-            Response::send(200, $userResponse);
-        } else {
-            Response::send(404, ['message' => 'Usuario no encontrado']);
-        }
+        $userResponse = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        Response::send(200, $userResponse);
     } 
 
     public function update($data) {

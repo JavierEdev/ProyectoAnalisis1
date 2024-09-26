@@ -72,9 +72,9 @@ class User {
     }
 
     public function getUserById($data) {
-        $query = "SELECT * FROM " . $this->table . " WHERE id_usuario = :id";
+        $query = "SELECT * FROM " . $this->table . " WHERE id_usuario = :id_usuario";
         $stmt = $this->conn->prepare($query);
-        $stmt->bindParam(':id', $data['id']);
+        $stmt->bindParam(':id_usuario', $data['id_usuario']);
         $stmt->execute();
         return $stmt;
     }
@@ -82,14 +82,13 @@ class User {
     public function update($data) {
         
         $query = "UPDATE " . $this->table . " 
-                SET nombre = :nombre, apellido = :apellido, email = :email, contrasena = :contrasena, rol = :rol, condominio = :condominio, estado = :estado
+                SET nombre = :nombre, apellido = :apellido, email = :email, rol = :rol, condominio = :condominio, estado = :estado
                 WHERE id_usuario = :id";
         $stmt = $this->conn->prepare($query);
 
         $stmt->bindParam(':nombre', $data['nombre']);
         $stmt->bindParam(':apellido', $data['apellido']);
         $stmt->bindParam(':email', $data['email']);
-        $stmt->bindParam(':contrasena', $data['contrasena']);
         $stmt->bindParam(':rol', $data['rol']);
         $stmt->bindParam(':condominio', $data['condominio']);
         $stmt->bindParam(':estado', $data['estado']);
