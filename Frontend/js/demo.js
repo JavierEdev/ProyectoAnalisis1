@@ -13,7 +13,7 @@ var events = [ {
 }, {
     id: "9jU6g6f",
     name: "Holiday #1",
-    description: "Lorem ipsum dolor sit amet.",
+    description: "10:00-11:00",
     date: today.getMonth() + 1 + "/10/" + today.getFullYear(),
     type: "holiday"
 }, {
@@ -79,6 +79,13 @@ $(document).ready(function() {
         // En "calendarEvents" es donde se 
         // agregan mas eventos que se mostrarán en el calendario
         calendarEvents: [
+            { 
+              id: "1",         
+              name: "Evento #1",
+              description: "10:00 - 11:00",
+              date: "2024-11-20 GMT-0600 (Central Standard Time)",
+              type: "a"
+            }
        
           ]
     });

@@ -31,10 +31,10 @@
             var _ = this;
             _.defaults = {
                 theme: 'Midnight Blue',   
-                format: 'mm/dd/yyyy',
+                format: 'YYYY-MM-DD',
                 titleFormat: 'MM yyyy',
                 eventHeaderFormat: 'MM d, yyyy',
-                firstDayOfWeek: 0,
+                firstDayOfWeek: 1,
                 language: 'es',
                 todayHighlight: false,
                 sidebarDisplayDefault: true,
