@@ -40,17 +40,14 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
-// Llenar tabla del espaciosAdmin.html
 function populateTable(data) {
   const tableBody = document.querySelector("#example tbody");
   tableBody.innerHTML = "";
 
-  // <td>${espacio.condominio}</td>
   data.forEach((reserva) => {
-    const estadoTexto = reserva.estado === 1 ? "Activo" : "Deshabilitado";
+    const estadoTexto = reserva.estado === 1 ? "Activa" : "Inactiva";
     const row = `
         <tr>
-            <td>${reserva.id_reservas}</td>
             <td>${reserva.usuario}</td>
             <td>${reserva.nombre}</td>
             <td>${reserva.fecha_reserva}</td>
@@ -58,69 +55,69 @@ function populateTable(data) {
             <td>${reserva.hora_fin}</td>
             <td>${estadoTexto}</td>
             <td>
-              <a href="#" class="btn btn-primary btn-sm btn-ver" data-id="${reserva.id_reservas}">Ver</a>
-              <a href="#" class="btn btn-primary btn-sm btn-ver" data-id="${reserva.id_reservas}">Editar</a>
-              <a href="#" class="btn btn-primary btn-delete" data-id="${reserva.id_reservas}">Deshabilitar</a>
+              <a href="reservasIndividualAdmin.html" class="btn btn-primary btn-sm btn-ver" data-id="${reserva.id_reservas}">Ver</a>
+              <a href="updateReserva.html" class="btn btn-primary btn-sm btn-ver" data-id="${reserva.id_reservas}">Editar</a>
+              <a href="#" class="btn btn-primary btn-delete" data-id="${reserva.id_reservas}">Desactivar</a>
             </td>
         </tr>
     `;
     tableBody.innerHTML += row;
-});
+  });
 
-//   const botonesVer = document.querySelectorAll(".btn-ver");
-//   botonesVer.forEach((boton) => {
-//     boton.addEventListener("click", function (event) {
-//       const idEspacio = event.target.getAttribute("data-id");
-//       localStorage.setItem("idEspacio", idEspacio);
-//     });
-//   });
+  const botonesVer = document.querySelectorAll(".btn-ver");
+  botonesVer.forEach((boton) => {
+    boton.addEventListener("click", function (event) {
+      const idReserva = event.target.getAttribute("data-id");
+      localStorage.setItem("idReserva", idReserva);
+    });
+  });
 
-//   const botonesEliminar = document.querySelectorAll(".btn-delete");
-//   botonesEliminar.forEach((boton) => {
-//     boton.addEventListener("click", function (event) {
-//       event.preventDefault();
-//       const idReserva = event.target.getAttribute("data-id");
-//       if (
-//         confirm(
-//           "¿Estás seguro de que deseas deshabilitar la reserva id: " +
-//             idReserva +
-//             "?"
-//         )
-//       ) {
-//         eliminarReserva(idReserva);
-//       }
-//     });
-//   });
-// }
+  const botonesEliminar = document.querySelectorAll(".btn-delete");
+  botonesEliminar.forEach((boton) => {
+    boton.addEventListener("click", function (event) {
+      event.preventDefault();
+      const idReserva = event.target.getAttribute("data-id");
+      if (
+        confirm(
+          "¿Estás seguro de que deseas desactivar la reserva id: " +
+            idReserva +
+            "?"
+        )
+      ) {
+        eliminarReserva(idReserva);
+      }
+    });
+  });
+}
 
-// function eliminarReserva(idReserva) {
-//   const token = localStorage.getItem("token");
-//   const idCondo = localStorage.getItem("idCondo");
+function eliminarReserva(idReserva) {
+  const token = localStorage.getItem("token");
+  const idCondo = localStorage.getItem("idCondo");
 
-//   fetch(
-//     "http://localhost/ProyectoAnalisis1/Backend/index.php/espacios/deleteIdEspacio",
-//     {
-//       method: "DELETE",
-//       headers: {
-//         Authorization: `Bearer ${token}`,
-//         "Content-Type": "application/json",
-//       },
-//       body: JSON.stringify({ id_condo: idCondo, id_reserva: idEspacio }),
-//     }
-//   )
-//     .then((response) => {
-//       if (!response.ok) {
-//         throw new Error("Error al deshabilitar el espacio");
-//       }
-//       return response.json();
-//     })
-//     .then((result) => {
-//       console.log(result);
-//       alert("Espacio deshabilitado correctamente");
-//       location.reload();
-//     })
-//     .catch((error) => {
-//       console.error("Error al deshabilitar el espacio:", error);
-//       alert("Error al deshabilitar el espacio.");
-//     });
+  fetch(
+    "http://localhost/ProyectoAnalisis1/Backend/index.php/reservas/deleteReserva",
+    {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ id_reservas: idReserva }),
+    }
+  )
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Error al desactivar la reserva.");
+      }
+      return response.json();
+    })
+    .then((result) => {
+      console.log(result);
+      alert("Reserva desactiva correctamente");
+      location.reload();
+    })
+    .catch((error) => {
+      console.error("Error al desactivar la reserva:", error);
+      alert("Error al desactivar la reservao.");
+    });
 }

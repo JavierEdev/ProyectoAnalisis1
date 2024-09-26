@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", function () {
         console.log("No se encontró el token en localStorage");
     }
 
-    // Inicializar Choices.js en el select
+    // GENERAR ESPACIOS USANDO EL API Y QUE SE FORME EL SELECT CON BUSQUEDA 
     const choices = new Choices(selectEspacio, {
         searchEnabled: true,
         itemSelectText: '',
@@ -44,5 +44,47 @@ document.addEventListener("DOMContentLoaded", function () {
     .catch(error => {
         console.error('Error al obtener los espacios:', error);
         alert('Error al obtener los espacios.');
+    });
+
+    // GUARDAR LA RESERVA HECHA POR EL ADMIN
+    const form = document.getElementById("formStyles");
+
+    form.addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        const idEspacio = selectEspacio.value;
+
+        const formData = {
+            id_usuario: document.getElementById("residente").value,
+            id_espacio: idEspacio,
+            fecha_reserva: document.getElementById("fecha_reserva").value,
+            hora_inicio: document.getElementById("fecha-entrada").value,
+            hora_fin: document.getElementById("fecha-salida").value
+        };
+
+        fetch(
+            "http://localhost/ProyectoAnalisis1/Backend/index.php/reservas/insertReserva",
+            {
+                method: "POST",
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(formData),
+            }
+        )
+        .then((response) => response.json())
+        .then((result) => {
+            if (result.message === "Reserva insertada") {
+                alert("Reserva Realizada");
+                window.location.href = "../Adminsitrador/reservasAdmin.html";
+            } else {
+                alert(result.message || "Error desconocido");
+            }
+        })
+        .catch((error) => {
+            console.error("Error al realizar la reserva:", error);
+            alert("Hubo un error en la reservación. Por favor, intente nuevamente.");
+        });
     });
 });
