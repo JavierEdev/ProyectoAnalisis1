@@ -40,7 +40,7 @@
                 <i class="bi bi-person-circle "></i>
               </a>
               <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">Mis Reservas</a></li>
+                <li><a class="dropdown-item" href="reservasUsuario.html">Mis Reservas</a></li>
                 <li><a class="dropdown-item" href="#">Cerrar Sesión</a></li>
               </ul>
             </li>
@@ -70,7 +70,9 @@
           <div class="container">
             <div class="row d-flex justify-content-center text-center">
               <div class="col-lg-8">
-                <h1>Nombre del lugar a Reservar</h1>
+                <h1 id="nombre-espacio">
+                  <!-- Se genera el nombre del espacio -->
+                </h1>
               </div>
             </div>
           </div>
@@ -104,25 +106,9 @@
                   }
                 </script>
   
-                <div class="swiper-wrapper align-items-center">
-  
-                  <div class="swiper-slide">
-                    <img src="../img/portfolio/app-1.jpg" alt="">
-                  </div>
-  
-                  <div class="swiper-slide">
-                    <img src="../img/portfolio/product-1.jpg" alt="">
-                  </div>
-  
-                  <div class="swiper-slide">
-                    <img src="../img/portfolio/branding-1.jpg" alt="">
-                  </div>
-  
-                  <div class="swiper-slide">
-                    <img src="../img/portfolio/books-1.jpg" alt="">
-                  </div>
-  
-                </div>
+                <!-- Swiper-wrapper donde se insertarán dinámicamente las imágenes -->
+                <div class="swiper-wrapper align-items-center"></div>
+                <!-- Paginación para el carrusel -->
                 <div class="swiper-pagination"></div>
               </div>
             </div>
@@ -130,9 +116,8 @@
             <div class="col-lg-4">
               <div class="place-info-description" data-aos="fade-up" data-aos-delay="200">
                 <h2>Descripción del lugar</h2>
-                <p>
-                  Autem ipsum nam porro corporis rerum. Quis eos dolorem eos itaque inventore commodi labore quia quia. Exercitationem repudiandae officiis neque suscipit non officia eaque itaque enim. Voluptatem officia accusantium nesciunt est omnis tempora consectetur dignissimos. Sequi nulla at esse enim cum deserunt eius.
-                  Autem ipsum nam porro corporis rerum. Quis eos dolorem eos itaque inventore commodi labore quia quia. Exercitationem repudiandae officiis neque suscipit non officia eaque itaque enim. Voluptatem officia accusantium nesciunt est omnis tempora consectetur dignissimos. Sequi nulla at esse enim cum deserunt eius.
+                <p id="descripcion">
+                  <!-- Se genera la descripcion del lugar -->
                 </p>
               </div>
               <div data-aos="fade-up" data-aos-delay="250"><hr></div>
@@ -166,7 +151,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Custom JS -->
     <script src="../js/script.js"></script>
-    <script src="../js/user.js"></script>
+    <script src="../js/viewEspacioUser.js"></script>
     <!-- NECESARIO PARA EL SWIPER -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@9.0.0/swiper-bundle.min.js"></script>
 

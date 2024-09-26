@@ -48,5 +48,47 @@ class AuthController {
             Response::send(401, ['message' => 'Credenciales invalidas']);
         }
     }
+
+    public function read() {
+        $users_data = $this->user->read();
+        
+        if ($users_data) {
+            Response::send(200, ['message' => 'Usuarios encontrados', 'data' => $users_data]);
+        } else {
+            Response::send(404, ['message' => 'No se encontraron usuarios']);
+        }
+    }
+
+    public function getUserByIdCondo($data) {
+        $stmt = $this->user->getUserByIdCondo($data);
+        $userResponse = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        Response::send(200, $userResponse);
+    } 
+
+    public function getUserById($data) {
+        $stmt = $this->user->getUserById($data);
+        $userResponse = $stmt->fetch(PDO::FETCH_ASSOC);
+        if ($userResponse) {
+            Response::send(200, $userResponse);
+        } else {
+            Response::send(404, ['message' => 'Usuario no encontrado']);
+        }
+    } 
+
+    public function update($data) {
+        if ($this->user->update($data)) {
+            Response::send(200, ['message' => 'Usuario actualizado exitosamente']);
+        } else {
+            Response::send(500, ['message' => 'Error al actualizar el usuario']);
+        }
+    }
+    
+    public function delete($data) {
+        if ($this->user->delete($data)) {
+            Response::send(200, ['message' => 'Usuario desactivado exitosamente']);
+        } else {
+            Response::send(500, ['message' => 'Error al desactivar el usuario']);
+        }
+    }
 }
 ?>

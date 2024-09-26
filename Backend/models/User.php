@@ -49,6 +49,72 @@ class User {
         }
     }
 
+    public function read() {
+        $query = "SELECT * FROM " . $this->table . " ";
+        
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        
+        $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        
+        if ($users) {
+            return $users;
+        }
+        return false;
+    }
+
+    public function getUserByIdCondo($data) {
+        $query = "SELECT * FROM " . $this->table . " WHERE condominio = :id_condo ";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':id_condo', $data['id_condo']);
+        $stmt->execute();
+        return $stmt;
+    }
+
+    public function getUserById($data) {
+        $query = "SELECT * FROM " . $this->table . " WHERE id_usuario = :id";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':id', $data['id']);
+        $stmt->execute();
+        return $stmt;
+    }
+
+    public function update($data) {
+        
+        $query = "UPDATE " . $this->table . " 
+                SET nombre = :nombre, apellido = :apellido, email = :email, contrasena = :contrasena, rol = :rol, condominio = :condominio, estado = :estado
+                WHERE id_usuario = :id";
+        $stmt = $this->conn->prepare($query);
+
+        $stmt->bindParam(':nombre', $data['nombre']);
+        $stmt->bindParam(':apellido', $data['apellido']);
+        $stmt->bindParam(':email', $data['email']);
+        $stmt->bindParam(':contrasena', $data['contrasena']);
+        $stmt->bindParam(':rol', $data['rol']);
+        $stmt->bindParam(':condominio', $data['condominio']);
+        $stmt->bindParam(':estado', $data['estado']);
+        $stmt->bindParam(':id', $data['id']);
+
+        if ($stmt->execute()) {
+            return true; 
+        } else {
+            return false; 
+        }
+    }
+
+    public function delete($data) {
+        $query = "UPDATE " . $this->table . " SET estado = 2 WHERE id_usuario = :id";
+
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':id', $data['id']);
+
+        if ($stmt->execute()) {
+            return true; 
+        } else {
+            return false; 
+        }
+    }    
+
     public function authenticate() {
         $query = "SELECT * FROM " . $this->table . " WHERE email = :email LIMIT 0,1";
 

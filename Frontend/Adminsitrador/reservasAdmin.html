@@ -9,12 +9,12 @@
     <!--CSS -->
     <link href="../css/styles.css" rel="stylesheet">
     <link href="../css/navbar.css" rel="stylesheet">
-    <link href="../css/tablasAdmin.css"rel="stylesheet" >
-     <!-- CSS Tabla Extraido de : https://datatables.net -->
-     <link rel="stylesheet" href="https://cdn.datatables.net/2.0.5/css/dataTables.bootstrap5.css">
-     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
-     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/3.0.2/css/buttons.dataTables.min.css">
-     <link rel="stylesheet" href="https://cdn.datatables.net/responsive/3.0.2/css/responsive.dataTables.min.css">
+    <link href="../css/tablasAdmin.css" rel="stylesheet" >
+    <!-- CSS Tabla Extraido de : https://datatables.net -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.0.5/css/dataTables.bootstrap5.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/3.0.2/css/buttons.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/3.0.2/css/responsive.dataTables.min.css">
     
     <title>Reservas</title>
 </head>
@@ -69,54 +69,42 @@
                 <!-- TABLA PARA VER LA BASE DE DATOS -->
             <div class="card p-4">
                 <table id="example" class="table table-striped" style="width:100%">
-
-                    <!-- 
-                       AGREGAR LOS NOMBRES DE LAS COLUMNAS DE LA BASE DE DATOS
-
-                       TAMBIEN CAMBIAR LOS NOMBRES EN EL "TFOT", SE ENCUENTRA DESPUES DEL "TBODY"
-                    -->
                     
+                    <!-- 
+                        AGREGAR LOS NOMBRES DE LAS COLUMNAS DE LA BASE DE DATOS
+                        
+                        TAMBIEN CAMBIAR LOS NOMBRES EN EL "TFOT", SE ENCUENTRA DESPUES DEL "TBODY"
+                        -->
+                        <a href="createReserva.html" class="btn btn-primary">Crear Reserva</a>
                         <thead>
                             <tr>
-                                <th>Name</th>
-                                <th>Position</th>
-                                <th>Office</th>
-                                <th>Age</th>
-                                <th>Start date</th>
-                                <th>Salary</th>    
-                                <th>modificar</th>
+                              <th>Usuario</th>
+                              <th>Espacio</th>
+                              <th>Fecha</th>
+                              <th>Hora Inicio</th>
+                              <th>Hora Fin</th>
+                              <th>Estado</th>
+                              <th>Opciones</th>
                             </tr>
                         </thead>
+                            <!-- 
+                                AQUI (dentro del tbody) VA EL FOR EACH PARA MOSTRAR LOS DATOS DE LA BASE DE DATOS
+                                BORRAR TODOS LOS TR DE EJEMPLO
+                            -->
                         <tbody>
-                                                  
-                        <!-- 
-                        AQUI (dentro del tbody) VA EL FOR EACH PARA MOSTRAR LOS DATOS DE LA BASE DE DATOS
-                        BORRAR TODOS LOS TR DE EJEMPLO
-                        -->
-                            <tr>
-                                <td>Tiger Nixon</td>
-                                <td>System Architect</td>
-                                <td>Edinburgh</td>
-                                <td>61</td>
-                                <td>2011-04-25</td>
-                                <td>$320,800</td>
-                                <td>
-                                    <a href="" class="btn btn-primary btn-sm">modificar</a>
-                                </td>
-                            </tr>
-                        
                     <!-- 
-                       AGREGAR LOS NOMBRES DE LAS COLUMNAS DE LA BASE DE DATOS
+                        AGREGAR LOS NOMBRES DE LAS COLUMNAS DE LA BASE DE DATOS
                     -->
+                        </tbody>
                         <tfoot>
                             <tr>
-                                <th>Name</th>
-                                <th>Position</th>
-                                <th>Office</th>
-                                <th>Age</th>
-                                <th>Start date</th>
-                                <th>Salary</th>
-                                <th>modificar</th>
+                              <th>Usuario</th>
+                              <th>Espacio</th>
+                              <th>Fecha</th>
+                              <th>Hora Inicio</th>
+                              <th>Hora Fin</th>
+                              <th>Estado</th>
+                              <th>Opciones</th>
                             </tr>
                         </tfoot>
 
@@ -148,20 +136,20 @@
         integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
         crossorigin="anonymous"
     ></script>
-     
-     <!-- JS Tabla Extraido de : https://datatables.net -->
-     <script defer src="https://code.jquery.com/jquery-3.7.1.js"></script>
-     <script defer src="https://cdn.datatables.net/2.0.5/js/dataTables.js"></script>
-     <script defer src="https://cdn.datatables.net/2.0.5/js/dataTables.bootstrap5.js"></script>
 
-     <script defer src="https://cdn.datatables.net/buttons/3.0.2/js/buttons.colVis.min.js"></script>
-     <script defer src="https://cdn.datatables.net/buttons/3.0.2/js/dataTables.buttons.min.js"></script>
-     <script defer src="https://cdn.datatables.net/buttons/3.0.2/js/buttons.html5.min.js"></script>
-     <script defer src="https://cdn.datatables.net/buttons/3.0.2/js/buttons.print.min.js"></script>
-     <script defer src="https://cdn.datatables.net/responsive/3.0.2/js/dataTables.responsive.min.js"></script>
+    <!-- JS Tabla Extraido de : https://datatables.net -->
+    <script defer src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script defer src="https://cdn.datatables.net/2.0.5/js/dataTables.js"></script>
+    <script defer src="https://cdn.datatables.net/2.0.5/js/dataTables.bootstrap5.js"></script>
+
+    <script defer src="https://cdn.datatables.net/buttons/3.0.2/js/buttons.colVis.min.js"></script>
+    <script defer src="https://cdn.datatables.net/buttons/3.0.2/js/dataTables.buttons.min.js"></script>
+    <script defer src="https://cdn.datatables.net/buttons/3.0.2/js/buttons.html5.min.js"></script>
+    <script defer src="https://cdn.datatables.net/buttons/3.0.2/js/buttons.print.min.js"></script>
+    <script defer src="https://cdn.datatables.net/responsive/3.0.2/js/dataTables.responsive.min.js"></script>
     
-     <script defer src="../js/Tabla.js"></script>
-     <script defer src="../js/user.js"></script>
-    
+    <script defer src="../js/Tabla.js"></script>
+    <script defer src="../js/reserva.js"></script>
+
 </body>
 </html> 

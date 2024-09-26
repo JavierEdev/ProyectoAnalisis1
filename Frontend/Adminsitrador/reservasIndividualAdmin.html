@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/3.0.2/css/buttons.dataTables.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/responsive/3.0.2/css/responsive.dataTables.min.css">
     
-    <title>Espacio ID</title>
+    <title>Revisar Reserva</title>
 </head>
 <body>
   <nav class="navbar fixed-top navbar-expand-sm justify-content-end">
@@ -64,35 +64,39 @@
 
     <main>
         <section id="reservaStyles">
-            <h2>Revisar Espacio</h2>
+            <h2>Revisar Reserva</h2>
 
             <form id="formStyles">
                 <div class="mb-3">
-                    <label for="id" class="form-label">Id Espacio</label>
-                    <input type="text" name="nombre" class="form-control" id="id" readonly>
+                    <label for="idReserva" class="form-label">Id Reserva</label>
+                    <input type="text" name="nombre" class="form-control" id="idReserva" readonly>
                 </div>
                 <div class="mb-3">
-                    <label for="nombre" class="form-label">Nombre</label>
-                    <input type="text" name="nombre" class="form-control" id="nombre" readonly>
+                    <label for="espacio" class="form-label">Espacio</label>
+                    <input type="text" name="descripcion" class="form-control" id="espacio" readonly>
                 </div>
                 <div class="mb-3">
-                    <label for="descripcion" class="form-label">Descripción</label>
-                    <input type="text" name="descripcion" class="form-control" id="descripcion" readonly>
+                    <label for="user" class="form-label">Residente</label>
+                    <input type="text" name="descripcion" class="form-control" id="user" readonly>
                 </div>
                 <div class="mb-3">
-                    <label for="ubicacion" class="form-label">Ubicación</label>
-                    <input type="text" class="form-control" name="ubicacion" id="ubicacion" readonly/>
+                    <label for="fecha" class="form-label">Fecha</label>
+                    <input type="text" class="form-control" name="ubicacion" id="fecha" readonly/>
                 </div>
                 <div class="mb-3">
-                    <label for="mantenimiento" class="form-label">En Mantenimiento</label>
-                    <input type="text" name="mantenimiento" class="form-control" id="mantenimiento" readonly>
+                    <label for="horaIni" class="form-label">Hora Inicio</label>
+                    <input type="text" name="mantenimiento" class="form-control" id="horaIni" readonly>
+                </div>
+                <div class="mb-3">
+                    <label for="horaFin" class="form-label">Hora Finalización</label>
+                    <input type="text" name="estado" class="form-control" id="horaFin" readonly>
                 </div>
                 <div class="mb-3">
                     <label for="estado" class="form-label">Estado</label>
                     <input type="text" name="estado" class="form-control" id="estado" readonly>
                 </div>
                 <div class="text-center mt-3">
-                  <a href="espaciosAdmin.html" class="login-register-link">Regresar</a>
+                    <a href="reservasAdmin.html" class="login-register-link">Regresar</a>
                 </div>
             </form>
         </section>
@@ -113,7 +117,7 @@
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <!-- JS  -->
-    <script defer src="../js/viewEspacio.js"></script>
+    <script defer src="../js/viewReserva.js"></script>
 
 </body>
 </html> 
