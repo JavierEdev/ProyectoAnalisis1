@@ -33,7 +33,8 @@ document.addEventListener("DOMContentLoaded", function () {
         })
         .then((result) => {
           console.log(result);
-          generarPortfolio(result);
+          console.log("idCondo antes de generarPortfolio:", idCondo);
+          generarPortfolio(result, idCondo);
         })
         .catch((error) => {
           console.error("Error al obtener los espacios:", error);
@@ -41,27 +42,54 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
   
-    function generarPortfolio(espacios) {
-      const container = document.querySelector(".isotope-container");
+    // function generarPortfolio(espacios) {
+    //   const container = document.querySelector(".isotope-container");
   
+    //   container.innerHTML = "";
+    //   espacios.forEach((espacio) => {
+    //     const espacioHTML = `
+    //       <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-${espacio.nombre}">
+    //         <div class="portfolio-content h-100">
+    //           <img src="../img/portfolio/app-1.jpg" class="img-fluid" alt="${espacio.descripcion}">
+    //           <div class="portfolio-info">
+    //             <h4>${espacio.nombre}: ${espacio.descripcion}</h4>
+    //             <a href="place-info2.html" title="More Details" class="details-link" data-id="${espacio.id_espacio}">
+    //               <i class="bi bi-plus"></i>
+    //             </a>
+    //           </div>
+    //         </div>
+    //       </div>
+    //     `;
+  
+    //     container.innerHTML += espacioHTML;
+    //   });
+
+    function generarPortfolio(espacios, idCondo) {
+      const container = document.querySelector(".isotope-container");
+      
       container.innerHTML = "";
       espacios.forEach((espacio) => {
+        const nombreEspacio = espacio.nombre.toLowerCase().replace(/\s+/g, '_');
+        const imagenPath = `../img/${idCondo}/${nombreEspacio}/1_${nombreEspacio}.jpg`;
+        console.log('Imagen path:', imagenPath);
+    
         const espacioHTML = `
           <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-${espacio.nombre}">
             <div class="portfolio-content h-100">
-              <img src="../img/portfolio/app-1.jpg" class="img-fluid" alt="${espacio.descripcion}">
+              <img src="${imagenPath}" class="img-fluid" alt="${espacio.descripcion}">
               <div class="portfolio-info">
                 <h4>${espacio.nombre}: ${espacio.descripcion}</h4>
-                <a href="place-info2.html" title="More Details" class="details-link" data-id="${espacio.id_espacio}">
+                <a href="place-info3.html" title="More Details" class="details-link" data-id="${espacio.id_espacio}">
                   <i class="bi bi-plus"></i>
                 </a>
               </div>
             </div>
           </div>
         `;
-  
+    
         container.innerHTML += espacioHTML;
       });
+
   
       const botonesVer = document.querySelectorAll(".details-link");
       botonesVer.forEach((boton) => {
