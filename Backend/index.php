@@ -96,6 +96,14 @@ switch ($uri[4]) {
             $data = json_decode(file_get_contents("php://input"), true);
             $authController->login($data);
         }
+        elseif ($method === 'POST' && $uri[5] === 'id_condo') {
+            $data = json_decode(file_get_contents("php://input"), true);
+            $authController->getUserByIdCondo($data);
+        }
+        elseif ($method === 'POST' && $uri[5] === 'id_usuario') {
+            $data = json_decode(file_get_contents("php://input"), true);
+            $authController->getUserById($data);
+        }
         // Leer un usuario
         elseif ($method === 'GET' && isset($uri[5]) ) {
             $authController->read();

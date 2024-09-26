@@ -63,6 +63,22 @@ class User {
         return false;
     }
 
+    public function getUserByIdCondo($data) {
+        $query = "SELECT * FROM " . $this->table . " WHERE condominio = :id_condo ";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':id_condo', $data['id_condo']);
+        $stmt->execute();
+        return $stmt;
+    }
+
+    public function getUserById($data) {
+        $query = "SELECT * FROM " . $this->table . " WHERE id_usuario = :id";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':id', $data['id']);
+        $stmt->execute();
+        return $stmt;
+    }
+
     public function update($data) {
         
         $query = "UPDATE " . $this->table . " 
