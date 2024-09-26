@@ -63,7 +63,7 @@ document.addEventListener("DOMContentLoaded", function () {
   
     //     container.innerHTML += espacioHTML;
     //   });
-
+    
     async function verificarImagen(url) {
       try {
           const respuesta = await fetch(url);
@@ -74,90 +74,90 @@ document.addEventListener("DOMContentLoaded", function () {
       } catch (error) {
           return null; // Ocurrió un error al verificar la imagen
       }
-  }
-  
-  async function generarPortfolio(espacios, idCondo) {
-    const container = document.querySelector(".isotope-container");
-    const filterContainer = document.getElementById("filter-container");
-
-    container.innerHTML = "";
-    filterContainer.innerHTML = ""; // Limpiamos los filtros previos
-    const categorias = new Set(); // Para almacenar las categorías únicas
-
-    // Añadir el filtro "Todos" primero
-    const filtroTodosHTML = `<li data-filter="*" class="filter-active">Todos</li>`;
-    filterContainer.innerHTML += filtroTodosHTML;
-
-    for (const espacio of espacios) {
-        const palabras = espacio.nombre.split(" ");
-        const primeraPalabra = palabras[0].toLowerCase(); // Usamos la primera palabra como categoría
-
-        // Añadir la categoría al set (solo se añaden categorías únicas)
-        categorias.add(primeraPalabra);
-
-        const nombreEspacio = espacio.nombre.toLowerCase().replace(/\s+/g, '_');
-        const baseImagenPath = `../img/${idCondo}/${nombreEspacio}/1_${nombreEspacio}`;
-        
-        // Extensiones a verificar
-        const extensiones = ['.jpg', '.jpeg', '.png'];
-        
-        let imagenPath = null;
-        
-        // Verificar cada extensión de imagen de forma secuencial
-        for (const ext of extensiones) {
-            const urlTemp = `${baseImagenPath}${ext}`;
-            imagenPath = await verificarImagen(urlTemp); // Llamada a la función que verifica la existencia
-            if (imagenPath) break; // Si la imagen existe, detener la búsqueda
-        }
-
-        // Si se encontró una imagen válida
-        if (imagenPath) {
-            const espacioHTML = `
-                <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-${primeraPalabra}">
-                    <div class="portfolio-content h-100">
-                        <img src="${imagenPath}" class="img-fluid" alt="${espacio.descripcion}">
-                        <div class="portfolio-info">
-                            <h4>${espacio.nombre}: ${espacio.descripcion}</h4>
-                            <a href="place-info2.html" title="More Details" class="details-link" data-id="${espacio.id_espacio}">
-                                <i class="bi bi-plus"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            `;
-            container.innerHTML += espacioHTML;
-        } else {
-            console.log(`No se encontró imagen para: ${espacio.nombre}`);
-        }
     }
-
-    // Generar los filtros dinámicamente
-    categorias.forEach((categoria) => {
-        const filtroHTML = `<li data-filter=".filter-${categoria}">${categoria.charAt(0).toUpperCase() + categoria.slice(1)}</li>`;
-        filterContainer.innerHTML += filtroHTML;
-    });
-
-    // Inicializar Isotope después de que las imágenes se hayan cargado
-    imagesLoaded(container, function () {
-        const isotope = new Isotope(container, {
-            itemSelector: '.portfolio-item',
-            layoutMode: 'fitRows'
-        });
-
-        // Añadir eventos de click para filtrar
-        const filtros = document.querySelectorAll('.portfolio-filters li');
-        filtros.forEach((filtro) => {
-            filtro.addEventListener('click', function () {
-                // Quitar la clase 'filter-active' de todos
-                filtros.forEach((el) => el.classList.remove('filter-active'));
-                // Añadir la clase 'filter-active' al seleccionado
-                this.classList.add('filter-active');
-
-                const filterValue = this.getAttribute('data-filter');
-                isotope.arrange({ filter: filterValue });
-            });
-        });
-    });
+  
+    async function generarPortfolio(espacios, idCondo) {
+      const container = document.querySelector(".isotope-container");
+      const filterContainer = document.getElementById("filter-container");
+  
+      container.innerHTML = "";
+      filterContainer.innerHTML = ""; // Limpiamos los filtros previos
+      const categorias = new Set(); // Para almacenar las categorías únicas
+  
+      // Añadir el filtro "Todos" primero
+      const filtroTodosHTML = `<li data-filter="*" class="filter-active">Todos</li>`;
+      filterContainer.innerHTML += filtroTodosHTML;
+  
+      for (const espacio of espacios) {
+          const palabras = espacio.nombre.split(" ");
+          const primeraPalabra = palabras[0].toLowerCase(); // Usamos la primera palabra como categoría
+  
+          // Añadir la categoría al set (solo se añaden categorías únicas)
+          categorias.add(primeraPalabra);
+  
+          const nombreEspacio = espacio.nombre.toLowerCase().replace(/\s+/g, '_');
+          const baseImagenPath = `../img/${idCondo}/${nombreEspacio}/1_${nombreEspacio}`;
+          
+          // Extensiones a verificar
+          const extensiones = ['.jpg', '.jpeg', '.png'];
+          
+          let imagenPath = null;
+          
+          // Verificar cada extensión de imagen de forma secuencial
+          for (const ext of extensiones) {
+              const urlTemp = `${baseImagenPath}${ext}`;
+              imagenPath = await verificarImagen(urlTemp); // Llamada a la función que verifica la existencia
+              if (imagenPath) break; // Si la imagen existe, detener la búsqueda
+          }
+  
+          // Si se encontró una imagen válida
+          if (imagenPath) {
+              const espacioHTML = `
+                  <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-${primeraPalabra}">
+                      <div class="portfolio-content h-100">
+                          <img src="${imagenPath}" class="img-fluid" alt="${espacio.descripcion}">
+                          <div class="portfolio-info">
+                              <h4>${espacio.nombre}: ${espacio.descripcion}</h4>
+                              <a href="place-info2.html" title="More Details" class="details-link" data-id="${espacio.id_espacio}">
+                                  <i class="bi bi-plus"></i>
+                              </a>
+                          </div>
+                      </div>
+                  </div>
+              `;
+              container.innerHTML += espacioHTML;
+          } else {
+              console.log(`No se encontró imagen para: ${espacio.nombre}`);
+          }
+      }
+  
+      // Generar los filtros dinámicamente
+      categorias.forEach((categoria) => {
+          const filtroHTML = `<li data-filter=".filter-${categoria}">${categoria.charAt(0).toUpperCase() + categoria.slice(1)}</li>`;
+          filterContainer.innerHTML += filtroHTML;
+      });
+  
+      // Inicializar Isotope después de que las imágenes se hayan cargado
+      imagesLoaded(container, function () {
+          const isotope = new Isotope(container, {
+              itemSelector: '.portfolio-item',
+              layoutMode: 'fitRows'
+          });
+  
+          // Añadir eventos de click para filtrar
+          const filtros = document.querySelectorAll('.portfolio-filters li');
+          filtros.forEach((filtro) => {
+              filtro.addEventListener('click', function () {
+                  // Quitar la clase 'filter-active' de todos
+                  filtros.forEach((el) => el.classList.remove('filter-active'));
+                  // Añadir la clase 'filter-active' al seleccionado
+                  this.classList.add('filter-active');
+  
+                  const filterValue = this.getAttribute('data-filter');
+                  isotope.arrange({ filter: filterValue });
+              });
+          });
+      });
   
       const botonesVer = document.querySelectorAll(".details-link");
       botonesVer.forEach((boton) => {
