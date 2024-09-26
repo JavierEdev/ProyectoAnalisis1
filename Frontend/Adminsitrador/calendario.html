@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <!--CSS -->
+    <link rel="stylesheet" type="text/css" href="../css/evo-calendar.min.css">
+    <link rel="stylesheet" type="text/css" href="../css/evo-calendar.midnight-blue.min.css">
+    <link rel="stylesheet" type="text/css" href="../css/demo.css">
+    <link href="../css/styles.css" rel="stylesheet">
+    <link href="../css/navbar.css" rel="stylesheet">
+    <link href="../css/tablasAdmin.css" rel="stylesheet" >
+    <link rel="stylesheet" href="../css/reservaCalendario.css">
+    <!-- CSS Tabla Extraido de : https://datatables.net -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.0.5/css/dataTables.bootstrap5.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/3.0.2/css/buttons.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/3.0.2/css/responsive.dataTables.min.css">
+    
+    <title>Espacios</title>
+</head>
+<body>
+    <nav class="navbar fixed-top navbar-expand-sm justify-content-end">
+        <div class="container-fluid">
+  
+          <a class="nav-link active " id="navbarTituloStyles" aria-current="page" href="calendario.html" style="color: white;">
+            Residencial
+          </a>
+  
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+  
+          <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
+              <ul class="navbar-nav">
+                <li class="nav-item dropdown animacionUnderline">
+                  <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: white;">
+                    <label for="bi bi-person-circle " class="username" id="username">C</label>
+                    <i class="bi bi-person-circle "></i>
+                  </a>
+                  <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="index3.html">Vista Residente</a></li>
+                    <li><a class="dropdown-item" href="#">Cerrar Sesión</a></li>
+                  </ul>
+                </li>
+                <li class="nav-item" >
+                  <a class="nav-link active animacionUnderline" aria-current="page" href="calendario.html" style="color: white;">Calendario</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link animacionUnderline" href="espaciosAdmin.html" style="color: white;">Espacios</a>
+                </li>
+                
+                <li class="nav-item">
+                  <a class="nav-link animacionUnderline" href="usuariosAdmin.html" style="color: white;">Residentes</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link animacionUnderline" href="reservasAdmin.html" style="color: white;">Reservas</a>
+                </li>
+  
+              </ul>
+          </div>
+  
+        </div>
+      </nav>
+        <main>
+
+        <section id="calendario">
+            <h1 id="h1Calendario">Calendario Reservas</h1>
+            <div id="instruccionesCalendario">
+                En este calendario puedes ver las reservas realizadas por los residentes.
+            </div>
+
+            <div class="log-content">
+                <div class="--noshadow" id="demoEvoCalendar"></div>
+            </div>
+            
+        </section>
+
+       </main>
+
+        <footer class="login-footer bg-dark text-white py-4">
+            <div class="container text-center">
+                <p class="mb-3">&copy; 2024 Empresa. Todos los derechos reservados.</p>
+                <div class="login-social-icons">
+                    <a href="#" class="text-white me-3"><i class="bi bi-twitter"></i></a>
+                    <a href="#" class="text-white me-3"><i class="bi bi-facebook"></i></a>
+                    <a href="#" class="text-white me-3"><i class="bi bi-instagram"></i></a>
+                    <a href="#" class="text-white"><i class="bi bi-linkedin"></i></a>
+                </div>
+            </div>
+        </footer>
+
+    <!-- jQuery y calendario-->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+    <script src="../js/evo-calendar.js"></script>
+    <script src="../js/demo.js"></script>
+    <script src="../js/pickdate.js"></script>
+    <script src="../js/reservaUser.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -71,75 +71,187 @@ function getWeeksInMonth(a, b) {
 
 week_date = getWeeksInMonth(today.getMonth(), today.getFullYear())[2];
 
-$(document).ready(function() {
+// $(document).ready(function() {
   
-    $("#demoEvoCalendar").evoCalendar({
-        format: "MM dd, yyyy",
-        titleFormat: "MM",
-        // En "calendarEvents" es donde se 
-        // agregan mas eventos que se mostrarán en el calendario
-        calendarEvents: [
-            { 
-              id: "1",         
-              name: "Evento #1",
-              description: "10:00 - 11:00",
-              date: "2024-11-20 GMT-0600 (Central Standard Time)",
-              type: "a"
-            }
+//     $("#demoEvoCalendar").evoCalendar({
+//         format: "MM dd, yyyy",
+//         titleFormat: "MM",
+//         // En "calendarEvents" es donde se 
+//         // agregan mas eventos que se mostrarán en el calendario
+//         calendarEvents: [
+//             { 
+//               id: "1",         
+//               name: "Evento #1",
+//               description: "10:00 - 11:00",
+//               date: "2024-11-20 GMT-0600 (Central Standard Time)",
+//               type: "a"
+//             }
        
-          ]
-    });
-    $("[data-set-theme]").click(function(b) {
-        a(b.target);
-    });
-    $("#addBtn").click(function(a) {
-        curAdd = getRandom(events.length);
-        $("#demoEvoCalendar").evoCalendar("addCalendarEvent", events[curAdd]);
-        active_events.push(events[curAdd]);
-        events.splice(curAdd, 1);
-        if (0 === events.length) a.target.disabled = !0;
-        if (active_events.length > 0) $("#removeBtn").prop("disabled", !1);
-    });
-    $("#removeBtn").click(function(a) {
-        curRmv = getRandom(active_events.length);
-        $("#demoEvoCalendar").evoCalendar("removeCalendarEvent", active_events[curRmv].id);
-        events.push(active_events[curRmv]);
-        active_events.splice(curRmv, 1);
-        if (0 === active_events.length) a.target.disabled = !0;
-        if (events.length > 0) $("#addBtn").prop("disabled", !1);
-    });
-    a($("[data-set-theme]")[defaultTheme]);
-    function a(a) {
-        var b = a.dataset.setTheme;
-        $("[data-set-theme]").removeClass("active");
-        $(a).addClass("active");
-        $("#demoEvoCalendar").evoCalendar("setTheme", b);
-    }
-    var b = getRandom($("[data-settings]").length);
-    var c = $("[data-settings]")[b];
-    var d = getRandom($("[data-method]").length);
-    var e = $("[data-method]")[d];
-    var f = getRandom($("[data-event]").length);
-    var g = $("[data-event]")[f];
-    showSettingsSample($(c).data().settings);
-    showMethodSample($(e).data().method);
-    showEventSample($(g).data().event);
-    $("[data-settings]").on("click", function(a) {
-        var b = $(a.target).closest("[data-settings]");
-        var c = b.data().settings;
-        showSettingsSample(c);
-    });
-    $("[data-method]").on("click", function(a) {
-        var b = $(a.target).closest("[data-method]");
-        var c = b.data().method;
-        showMethodSample(c);
-    });
-    $("[data-event]").on("click", function(a) {
-        var b = $(a.target).closest("[data-event]");
-        var c = b.data().event;
-        showEventSample(c);
-    });   
+//           ]
+//     });
+//     $("[data-set-theme]").click(function(b) {
+//         a(b.target);
+//     });
+//     $("#addBtn").click(function(a) {
+//         curAdd = getRandom(events.length);
+//         $("#demoEvoCalendar").evoCalendar("addCalendarEvent", events[curAdd]);
+//         active_events.push(events[curAdd]);
+//         events.splice(curAdd, 1);
+//         if (0 === events.length) a.target.disabled = !0;
+//         if (active_events.length > 0) $("#removeBtn").prop("disabled", !1);
+//     });
+//     $("#removeBtn").click(function(a) {
+//         curRmv = getRandom(active_events.length);
+//         $("#demoEvoCalendar").evoCalendar("removeCalendarEvent", active_events[curRmv].id);
+//         events.push(active_events[curRmv]);
+//         active_events.splice(curRmv, 1);
+//         if (0 === active_events.length) a.target.disabled = !0;
+//         if (events.length > 0) $("#addBtn").prop("disabled", !1);
+//     });
+//     a($("[data-set-theme]")[defaultTheme]);
+//     function a(a) {
+//         var b = a.dataset.setTheme;
+//         $("[data-set-theme]").removeClass("active");
+//         $(a).addClass("active");
+//         $("#demoEvoCalendar").evoCalendar("setTheme", b);
+//     }
+//     var b = getRandom($("[data-settings]").length);
+//     var c = $("[data-settings]")[b];
+//     var d = getRandom($("[data-method]").length);
+//     var e = $("[data-method]")[d];
+//     var f = getRandom($("[data-event]").length);
+//     var g = $("[data-event]")[f];
+//     showSettingsSample($(c).data().settings);
+//     showMethodSample($(e).data().method);
+//     showEventSample($(g).data().event);
+//     $("[data-settings]").on("click", function(a) {
+//         var b = $(a.target).closest("[data-settings]");
+//         var c = b.data().settings;
+//         showSettingsSample(c);
+//     });
+//     $("[data-method]").on("click", function(a) {
+//         var b = $(a.target).closest("[data-method]");
+//         var c = b.data().method;
+//         showMethodSample(c);
+//     });
+//     $("[data-event]").on("click", function(a) {
+//         var b = $(a.target).closest("[data-event]");
+//         var c = b.data().event;
+//         showEventSample(c);
+//     });   
+// });
+
+
+
+
+
+
+
+$(document).ready(function() {
+  $("#demoEvoCalendar").evoCalendar({
+      format: "yyyy-mm-dd",
+      titleFormat: "MM",
+      calendarEvents: []
+  });
+
+  cargarReservas();
+
+  function cargarReservas() {
+      const token = localStorage.getItem("token");
+      const idCondo = localStorage.getItem("idCondo");
+
+      // CON ESTO SE CONSUME EL API Y SE LOGRA OBTENER TODAS LAS RESERVAS COMO EN LA TABLA DE ADMINISTRADOR
+      fetch("http://localhost/ProyectoAnalisis1/Backend/index.php/reservas", {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ id_condo: idCondo }),
+      })
+      .then(response => response.json())
+      .then(data => {
+        console.log(data)
+          data.forEach(reserva => {
+              $("#demoEvoCalendar").evoCalendar("addCalendarEvent", {
+                id: reserva.id_reserva,
+                name: reserva.nombre,
+                date: reserva.fecha_reserva,
+                description: `Reserva por ${reserva.usuario}, ${reserva.hora_inicio} a ${reserva.hora_fin}`,
+                user: reserva.usuario,
+                type: "Event"
+              });
+          });
+      })
+      .catch(error => {
+          console.error('Error al cargar las reservas:', error);
+      });
+  }
+
+  $("[data-set-theme]").click(function(b) {
+      a(b.target);
+  });
+
+  $("#addBtn").click(function(a) {
+      curAdd = getRandom(events.length);
+      $("#demoEvoCalendar").evoCalendar("addCalendarEvent", events[curAdd]);
+      active_events.push(events[curAdd]);
+      events.splice(curAdd, 1);
+      if (0 === events.length) a.target.disabled = !0;
+      if (active_events.length > 0) $("#removeBtn").prop("disabled", !1);
+  });
+
+  $("#removeBtn").click(function(a) {
+      curRmv = getRandom(active_events.length);
+      $("#demoEvoCalendar").evoCalendar("removeCalendarEvent", active_events[curRmv].id);
+      events.push(active_events[curRmv]);
+      active_events.splice(curRmv, 1);
+      if (0 === active_events.length) a.target.disabled = !0;
+      if (events.length > 0) $("#addBtn").prop("disabled", !1);
+  });
+
+  a($("[data-set-theme]")[defaultTheme]);
+  function a(a) {
+      var b = a.dataset.setTheme;
+      $("[data-set-theme]").removeClass("active");
+      $(a).addClass("active");
+      $("#demoEvoCalendar").evoCalendar("setTheme", b);
+  }
+
+  var b = getRandom($("[data-settings]").length);
+  var c = $("[data-settings]")[b];
+  var d = getRandom($("[data-method]").length);
+  var e = $("[data-method]")[d];
+  var f = getRandom($("[data-event]").length);
+  var g = $("[data-event]")[f];
+  showSettingsSample($(c).data().settings);
+  showMethodSample($(e).data().method);
+  showEventSample($(g).data().event);
+  
+  $("[data-settings]").on("click", function(a) {
+      var b = $(a.target).closest("[data-settings]");
+      var c = b.data().settings;
+      showSettingsSample(c);
+  });
+  
+  $("[data-method]").on("click", function(a) {
+      var b = $(a.target).closest("[data-method]");
+      var c = b.data().method;
+      showMethodSample(c);
+  });
+  
+  $("[data-event]").on("click", function(a) {
+      var b = $(a.target).closest("[data-event]");
+      var c = b.data().event;
+      showEventSample(c);
+  });
 });
+
+
+
+
+
+
 
 
 
