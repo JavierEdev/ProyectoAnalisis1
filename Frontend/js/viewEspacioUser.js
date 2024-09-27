@@ -47,6 +47,13 @@ function llenarPagina(espacio) {
         botonReserva.href = "#";  
     }
 
+    if (espacio.mantenimiento === 0) {
+        botonReserva.textContent = "Espacio En Mantenimieto";
+        botonReserva.classList.add('disabled');
+        botonReserva.style.pointerEvents = 'none';
+        botonReserva.href = "#";
+    }
+
     localStorage.setItem('nombreEspacio', espacio.nombre);
 }
 
