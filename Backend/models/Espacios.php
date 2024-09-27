@@ -65,16 +65,38 @@ class Espacio {
         return false;
     }
 
+    // public function delete_espacio($data) {
+    //     $query = "UPDATE " . $this->table . " SET estado = 2
+    //               WHERE id_espacio = :id_espacio
+    //               AND condominio = :condominio";
+    
+    //     $stmt = $this->conn->prepare($query);
+    
+    //     $stmt->bindParam(':id_espacio', $data['id_espacio']);
+    //     $stmt->bindParam(':condominio', $data['id_condo']);
+    
+    //     try {
+    //         if ($stmt->execute()) {
+    //             return true;
+    //         }
+    //     } catch (PDOException $e) {
+    //         echo "Error al ejecutar la consulta: " . $e->getMessage();
+    //     }
+    
+    //     return false;
+    // }
+
     public function delete_espacio($data) {
-        $query = "UPDATE " . $this->table . " SET estado = 2
-                  WHERE id_espacio = :id_espacio
-                  AND condominio = :condominio";
-    
+        $query = "UPDATE " . $this->table . " SET estado = :nuevo_estado
+              WHERE id_espacio = :id_espacio
+              AND condominio = :condominio";
+
         $stmt = $this->conn->prepare($query);
-    
+
         $stmt->bindParam(':id_espacio', $data['id_espacio']);
         $stmt->bindParam(':condominio', $data['id_condo']);
-    
+        $stmt->bindParam(':nuevo_estado', $data['nuevo_estado']);
+
         try {
             if ($stmt->execute()) {
                 return true;
@@ -82,7 +104,7 @@ class Espacio {
         } catch (PDOException $e) {
             echo "Error al ejecutar la consulta: " . $e->getMessage();
         }
-    
+
         return false;
     }
     

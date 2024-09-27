@@ -101,27 +101,53 @@ class User {
         }
     }
 
+    // public function delete($data) {
+    //     $query = "UPDATE " . $this->table . " SET estado = 2 WHERE id_usuario = :id";
+
+    //     $stmt = $this->conn->prepare($query);
+    //     $stmt->bindParam(':id', $data['id']);
+
+    //     if ($stmt->execute()) {
+    //         return true; 
+    //     } else {
+    //         return false; 
+    //     }
+    // }    
+
     public function delete($data) {
-        $query = "UPDATE " . $this->table . " SET estado = 2 WHERE id_usuario = :id";
-
+        $query = "UPDATE " . $this->table . " SET estado = :estado WHERE id_usuario = :id";
         $stmt = $this->conn->prepare($query);
+        
+        $stmt->bindParam(':estado', $data['estado']);
         $stmt->bindParam(':id', $data['id']);
+        
+        return $stmt->execute();
+    }
 
-        if ($stmt->execute()) {
-            return true; 
-        } else {
-            return false; 
-        }
-    }    
+    // public function authenticate() {
+    //     $query = "SELECT * FROM " . $this->table . " WHERE email = :email LIMIT 0,1";
+
+    //     $stmt = $this->conn->prepare($query);
+    //     $stmt->bindParam(':email', $this->email);
+    //     $stmt->execute();
+    //     $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    //     if ($user) {
+    //         if (password_verify($this->contrasena, $user['contrasena'])) {
+    //             return $user;
+    //         }
+    //     }
+    //     return false;
+    // }
 
     public function authenticate() {
-        $query = "SELECT * FROM " . $this->table . " WHERE email = :email LIMIT 0,1";
-
+        $query = "SELECT * FROM " . $this->table . " WHERE email = :email AND estado = 1 LIMIT 0,1";
+    
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(':email', $this->email);
         $stmt->execute();
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
-
+    
         if ($user) {
             if (password_verify($this->contrasena, $user['contrasena'])) {
                 return $user;

@@ -45,7 +45,8 @@ class AuthController {
             $token = $auth->createToken($user_data['id_usuario']);
             Response::send(200, ['message' => 'Login creado', 'token' => $token, 'id_user' => $user_data['id_usuario'], 'user_name' => $user_data['nombre'], 'id_condo' => $user_data['condominio'], 'id_rol' => $user_data['rol']]);
         } else {
-            Response::send(401, ['message' => 'Credenciales invalidas']);
+            // Response::send(401, ['message' => 'Credenciales invalidas']);
+            Response::send(401, ['message' => 'Credenciales inválidas o usuario inactivo']);
         }
     }
 
