@@ -34,7 +34,7 @@
                 format: 'YYYY-MM-DD',
                 titleFormat: 'MM yyyy',
                 eventHeaderFormat: 'MM d, yyyy',
-                firstDayOfWeek: 1,
+                firstDayOfWeek: 0,
                 language: 'es',
                 todayHighlight: false,
                 sidebarDisplayDefault: true,

@@ -149,7 +149,8 @@ week_date = getWeeksInMonth(today.getMonth(), today.getFullYear())[2];
 
 $(document).ready(function() {
   $("#demoEvoCalendar").evoCalendar({
-      format: "yyyy-mm-dd",
+      //format: "yyyy-mm-dd",
+      format: "MM dd, yyyy",
       titleFormat: "MM",
       calendarEvents: []
   });

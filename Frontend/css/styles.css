@@ -84,6 +84,7 @@ html {
 
 /* Estilos específicos para las páginas de Registro y Login */
 .login-page-title {
+  margin-top: 0rem;
   font-size: 2.5rem;
   font-weight: bold;
   margin-bottom: 1rem;
@@ -104,6 +105,7 @@ html {
 }
 
 .login-form-container {
+  margin-top: 0rem;
   background-color: rgba(0, 0, 0, 0.7);
   padding: 2rem;
   border-radius: 10px;
@@ -714,8 +716,8 @@ section,
 }
 
 .swiper-slide img {
-  width: 80%; /* Asegura que la imagen ocupe todo el ancho */
-  height: 550px; /* Ajusta la altura según lo que desees */
-  object-fit: cover; /* Mantén la proporción de la imagen y corta si es necesario */
+  width: 80%; /* Asegura que la imagen ocupe todo el ancho /
+  height: 550px; / Ajusta la altura según lo que desees /
+  object-fit: cover; / Mantén la proporción de la imagen y corta si es necesario */
 }
 

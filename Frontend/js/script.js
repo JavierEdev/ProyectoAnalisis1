@@ -57,16 +57,34 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Ejecuta la función al cargar para asegurar el estado inicial correcto
     window.dispatchEvent(new Event('resize'));
+    
+    // Swiper
+    const swiper = new Swiper('.swiper', {
+        // Optional parameters
+        direction: 'vertical',
+        loop: true,
+      
+        // If we need pagination
+        pagination: {
+          el: '.swiper-pagination',
+        },
+      
+        // Navigation arrows
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev',
+        },
+      
+        // And if we need scrollbar
+        scrollbar: {
+          el: '.swiper-scrollbar',
+        },
+      });
+
 });
 
-// Swiper
-document.addEventListener('DOMContentLoaded', function() {
-    const swiperConfigScript = document.querySelector('.swiper-config');
-    const swiperConfig = JSON.parse(swiperConfigScript.textContent);
 
-    swiperConfig.autoplay = swiperConfig.autoplay || {
-        delay: 5000, // Cambia cada 5 segundos
-        disableOnInteraction: false // Continúa el autoplay incluso si el usuario interactúa
-    };
-    const swiper = new Swiper('.init-swiper', swiperConfig);
-});
+
+
+
+

@@ -17,7 +17,9 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
     <!-- NECESARIO PARA EL SWIPER -->
-    <link href="https://cdn.jsdelivr.net/npm/swiper@9.0.0/swiper-bundle.min.css" rel="stylesheet">
+    <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"/>
 </head>
 <body class="d-flex flex-column min-vh-100">
 
@@ -91,22 +93,6 @@
             <div class="col-lg-8">
               <div class="place-info-details-slider swiper init-swiper">
   
-                <script type="application/json" class="swiper-config">
-                  {
-                    "loop": true,
-                    "speed": 600,
-                    "autoplay": {
-                      "delay": 5000
-                    },
-                    "slidesPerView": "auto",
-                    "pagination": {
-                      "el": ".swiper-pagination",
-                      "type": "bullets",
-                      "clickable": true
-                    }
-                  }
-                </script>
-  
                 <!-- Swiper-wrapper donde se insertarán dinámicamente las imágenes -->
                 <div class="swiper-wrapper align-items-center"></div>
                 <!-- Paginación para el carrusel -->
@@ -153,8 +139,8 @@
     <!-- Custom JS -->
     <script src="../js/script.js"></script>
     <script src="../js/viewEspacioUserAdmin.js"></script>
-    <!-- NECESARIO PARA EL SWIPER -->
-    <script src="https://cdn.jsdelivr.net/npm/swiper@9.0.0/swiper-bundle.min.js"></script>
+     <!-- NECESARIO PARA EL SWIPER -->
+     <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
 
 </body>
 </html>
