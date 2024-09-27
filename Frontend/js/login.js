@@ -33,11 +33,13 @@ document.addEventListener("DOMContentLoaded", function () {
                 }
             } else {
                 alert(result.message || 'Error desconocido');
+                location.reload();
             }
         })
         .catch(error => {
             console.error("Credenciales invalidas:", error);
             alert('Credenciales invalidas.');
+            location.reload();
         });
     });
 });

@@ -32,7 +32,8 @@ class ReservasController {
         if ($this->reserva->insertar_reserva($data)) {
             Response::send(200, ['message' => 'Reserva insertada']);
         } else {
-            Response::send(500, ['message' => 'Ocurrio un error en el controlador de reserva || Insert Reserva']);
+            // Response::send(500, ['message' => 'Ocurrio un error en el controlador de reserva || Insert Reserva']);
+            Response::send(500, ['message' => 'Ya hay una reserva con esa información u Occurrio un error. || Insert Reserva']);
         }
     }
 

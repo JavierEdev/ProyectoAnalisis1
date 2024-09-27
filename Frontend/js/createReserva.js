@@ -115,11 +115,13 @@ document.addEventListener("DOMContentLoaded", function () {
                 window.location.href = "../Adminsitrador/reservasAdmin.html";
             } else {
                 alert(result.message || "Error desconocido");
+                location.reload();
             }
         })
         .catch((error) => {
             console.error("Error al realizar la reserva:", error);
             alert("Hubo un error en la reservación. Por favor, intente nuevamente.");
+            location.reload();
         });
     });
 });

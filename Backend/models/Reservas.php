@@ -50,21 +50,69 @@ class Reservas {
         return $stmt;
     }
 
-    public function insertar_reserva($data){
-        $query = "INSERT INTO reservas (id_espacio,fecha_reserva,hora_inicio,hora_fin,usuario_reserva,estado) 
-        VALUES (:id_espacio,:fecha_reserva,:hora_inicio,:hora_fin,:id_usuario,1)";
 
+
+
+    // AÑADIR ESTA FUNCIÓN PARA VALIDACION DE FECHAS
+    public function validar_reserva_existente($data) {
+        $query = "SELECT COUNT(*) as total FROM " . $this->table . " 
+                    WHERE id_espacio = :id_espacio 
+                    AND fecha_reserva = :fecha_reserva 
+                    AND estado = 1 
+                    AND (
+                        (hora_inicio < :hora_inicio AND hora_fin > :hora_inicio) OR 
+                        (hora_inicio < :hora_fin AND hora_fin > :hora_fin) OR
+                        (:hora_inicio <= hora_inicio AND :hora_fin >= hora_fin)
+                    )";
+        
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':id_espacio', $data['id_espacio']);
+        $stmt->bindParam(':fecha_reserva', $data['fecha_reserva']);
+        $stmt->bindParam(':hora_inicio', $data['hora_inicio']);
+        $stmt->bindParam(':hora_fin', $data['hora_fin']);
+        $stmt->execute();
+    
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result['total'] > 0; // Devuelve true si ya existe una reserva que se solapa
+    }
+
+    public function insertar_reserva($data) {
+        if ($this->validar_reserva_existente($data)) {
+            return false; // Si existe una reserva, devolver false para indicar el error
+        }
+    
+        $query = "INSERT INTO reservas (id_espacio,fecha_reserva,hora_inicio,hora_fin,usuario_reserva,estado) 
+                  VALUES (:id_espacio,:fecha_reserva,:hora_inicio,:hora_fin,:id_usuario,1)";
+    
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(':id_usuario', $data['id_usuario']);
         $stmt->bindParam(':id_espacio', $data['id_espacio']);
         $stmt->bindParam(':fecha_reserva', $data['fecha_reserva']);
         $stmt->bindParam(':hora_inicio', $data['hora_inicio']);
         $stmt->bindParam(':hora_fin', $data['hora_fin']);
+    
         if ($stmt->execute()) {
             return true;
         }
         return false;
     }
+
+    // ************ -> OLD ONE <- *****************************
+    // public function insertar_reserva($data){
+    //     $query = "INSERT INTO reservas (id_espacio,fecha_reserva,hora_inicio,hora_fin,usuario_reserva,estado) 
+    //     VALUES (:id_espacio,:fecha_reserva,:hora_inicio,:hora_fin,:id_usuario,1)";
+
+    //     $stmt = $this->conn->prepare($query);
+    //     $stmt->bindParam(':id_usuario', $data['id_usuario']);
+    //     $stmt->bindParam(':id_espacio', $data['id_espacio']);
+    //     $stmt->bindParam(':fecha_reserva', $data['fecha_reserva']);
+    //     $stmt->bindParam(':hora_inicio', $data['hora_inicio']);
+    //     $stmt->bindParam(':hora_fin', $data['hora_fin']);
+    //     if ($stmt->execute()) {
+    //         return true;
+    //     }
+    //     return false;
+    // }
 
     public function update_reserva($data){
         $query = "UPDATE "  . $this->table . " SET fecha_reserva = :fecha_reserva, hora_inicio = :hora_inicio, hora_fin = :hora_fin 
