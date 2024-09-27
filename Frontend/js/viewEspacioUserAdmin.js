@@ -38,6 +38,15 @@ function llenarPagina(espacio) {
     document.getElementById('nombre-espacio').textContent = espacio.nombre;
     document.getElementById('descripcion').textContent = espacio.descripcion;
 
+    const botonReserva = document.getElementById('boton-reserva');
+    
+    if (espacio.estado === 2) {
+        botonReserva.textContent = "Espacio Deshabilitado";
+        botonReserva.classList.add('disabled');
+        botonReserva.style.pointerEvents = 'none';
+        botonReserva.href = "#";
+    }
+
     localStorage.setItem('nombreEspacio', espacio.nombre);
 }
 
