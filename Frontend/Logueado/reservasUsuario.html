@@ -16,6 +16,8 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdn.datatables.net/buttons/3.0.2/css/buttons.dataTables.min.css">
   <link rel="stylesheet" href="https://cdn.datatables.net/responsive/3.0.2/css/responsive.dataTables.min.css">
+  <!-- LIBRERIA PARA GENERAR QR -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 </head>
 <body>
         <nav class="navbar fixed-top navbar-expand-sm justify-content-end">
@@ -82,6 +84,7 @@
                               <th>Hora de Inicio</th>
                               <th>Hora de Fin</th>
                               <th>Estado</th>
+                              <th>QR</th>
                             </tr>
                         </thead>
                             <!-- 
@@ -101,6 +104,7 @@
                               <th>Hora de Inicio</th>
                               <th>Hora de Fin</th>
                               <th>Estado</th>
+                              <th>QR</th>
                             </tr>
                         </tfoot>
 
@@ -121,6 +125,27 @@
         </div>
     </footer>
     
+
+    <!-- Modal para mostrar el QR -->
+    <div class="modal fade" id="qrModal" tabindex="-1" aria-labelledby="qrModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="qrModalLabel">Código QR de la Reserva</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body text-center">
+            <!-- Aquí se generará el código QR -->
+            <div id="qrCode" style="width: 100%;"></div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
     <script
     src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
     integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
@@ -147,5 +172,6 @@
     <script defer src="../js/Tabla.js"></script>
     <script src="../js/viewReservaUser.js"></script>
     <script src="../js/logout.js"></script>
+
 </body>
 </html> 
