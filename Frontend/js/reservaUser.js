@@ -75,7 +75,7 @@ form.addEventListener("submit", function (e) {
     )
         .then((response) => response.json())
         .then((result) => {
-            if (result.message === "Reserva insertada") {
+            if (result.message === "Reserva insertada correctamente") {
             alert("Reserva Realizada");
             window.location.href = "index2.html";
             } else {
