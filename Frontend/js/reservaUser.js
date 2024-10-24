@@ -21,11 +21,51 @@ if (token) {
 const form = document.getElementById("formStyles");
 const checkbox = document.getElementById("exampleCheck1");
 const aceptarTerminosBtn = document.getElementById("aceptarTerminos");
+const selectEntrada = document.getElementById("fecha-entrada");
+const selectSalida = document.getElementById("fecha-salida");
 
 aceptarTerminosBtn.addEventListener("click", function () {
     checkbox.checked = true;
     checkbox.disabled = false;
 });
+
+
+selectEntrada.addEventListener("change", function () {
+    const horaInicio = selectEntrada.value;
+    generarOpcionesSalida(horaInicio);
+});
+
+  // Generar dinámicamente las opciones del select de salida
+function generarOpcionesSalida(horaInicio) {
+    const horasDisponibles = [
+    "09:00:00", "10:00:00", "11:00:00", "12:00:00", 
+    "13:00:00", "14:00:00", "15:00:00", "16:00:00", "17:00:00"
+    ];
+
+    selectSalida.innerHTML = '<option disabled selected>Seleccione hora de Salida</option>';
+
+    const indiceInicio = horasDisponibles.indexOf(horaInicio);
+
+    if (indiceInicio !== -1) {
+        for (let i = 0; i <= 4; i++) {
+            if (horasDisponibles[indiceInicio + i]) {
+            const option = document.createElement("option");
+            option.value = horasDisponibles[indiceInicio + i];
+            option.textContent = convertirFormatoHora(horasDisponibles[indiceInicio + i]);
+            selectSalida.appendChild(option);
+            }
+        }
+    }
+}
+
+  // Convertir formato de 24 horas a AM/PM
+function convertirFormatoHora(hora) {
+    const [h, m, s] = hora.split(":");
+    const horaInt = parseInt(h);
+    const sufijo = horaInt >= 12 ? "PM" : "AM";
+    const hora12 = horaInt % 12 || 12; // Convierte a formato de 12 horas
+    return `${hora12}:${m}:${s} ${sufijo}`;
+}
 
 form.addEventListener("submit", function (e) {
     e.preventDefault();
