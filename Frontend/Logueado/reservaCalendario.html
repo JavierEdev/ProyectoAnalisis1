@@ -110,6 +110,7 @@
                     <option value="16:00:00">4:00:00 PM</option>
                     <option value="17:00:00">5:00:00 PM</option>
                 </select>
+                
                 <label for="fecha-salida" class="form-label">Hora de salida</label>
                 <select class="form-select" aria-label="Default select example" id="fecha-salida">
                     <option disabled selected>Seleccione hora de Salida</option>
@@ -126,13 +127,41 @@
                 
                 <div class="mb-3 form-check">
                   <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                  <label class="form-check-label" for="exampleCheck1">He leido los terminos y condiciones</label>
+                  <label class="form-check-label" for="exampleCheck1">
+                    <a href="#" id="abrirTerminos" data-bs-toggle="modal" data-bs-target="#terminosModal">He leído los términos y condiciones</a>
+                  </label>
                 </div>
+
                 <div id="btnEnviarStyles">
                   <button type="submit" class="btn btn-primary">Reservar</button>
                 </div>
             </form>
         </section>
+
+        <!-- Modal -->
+        <div class="modal fade" id="terminosModal" tabindex="-1" aria-labelledby="terminosModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="terminosModalLabel">Términos y Condiciones</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <p style="text-align: justify;">
+                  1. Los usuarios que hagan uso de los espacios comunes del condominio se comprometen a cuidar las instalaciones y mantenerlas en buen estado. Está prohibido realizar cualquier acción que cause daños o deterioro a las áreas, mobiliario, o equipos disponibles. El respeto por el entorno y otros usuarios es fundamental para garantizar el uso adecuado de los espacios.<br><br>
+                  
+                  2. En caso de que se detecten daños o desperfectos atribuibles al uso indebido por parte de un usuario, este será responsable de cubrir los costos de reparación o reposición de los bienes afectados. El condominio se reserva el derecho de determinar el costo de las reparaciones y notificar al usuario responsable para que efectúe el pago correspondiente. <br><br>
+                  
+                  3. Todos los usuarios deberán respetar los horarios de uso establecidos para cada espacio, sin excepción. Cualquier actividad fuera de los horarios permitidos será considerada una infracción de estas normas. Asimismo, se solicita cumplir con las normativas adicionales que puedan ser comunicadas en los espacios, y colaborar para mantener un ambiente armónico y ordenado para todos.
+                </p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="aceptarTerminos" data-bs-dismiss="modal">Acepto los Términos</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
 
        </main>
 

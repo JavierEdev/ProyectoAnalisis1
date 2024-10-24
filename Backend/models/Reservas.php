@@ -77,11 +77,6 @@ class Reservas {
     }
 
     public function insertar_reserva($data) {
-
-        if (strtotime($data['hora_fin']) <= strtotime($data['hora_inicio'])) {
-            return false;
-        }
-
         if ($this->validar_reserva_existente($data)) {
             return false; // Si existe una reserva, devolver false para indicar el error
         }

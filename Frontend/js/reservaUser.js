@@ -19,9 +19,40 @@ if (token) {
 }
 
 const form = document.getElementById("formStyles");
+const checkbox = document.getElementById("exampleCheck1");
+const aceptarTerminosBtn = document.getElementById("aceptarTerminos");
+
+aceptarTerminosBtn.addEventListener("click", function () {
+    checkbox.checked = true;
+    checkbox.disabled = false;
+});
 
 form.addEventListener("submit", function (e) {
     e.preventDefault();
+
+    if(!checkbox.checked){
+        alert("Debe aceptar los términos y condiciones antes de hacer la reserva.");
+        return;
+    }
+
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    const fechaReserva = new Date(document.getElementById("fecha_reserva").value);
+    fechaReserva.setHours(0, 0, 0, 0);
+
+    if (fechaReserva < today) {
+        alert("La fecha de reserva no puede ser menor a la fecha actual.");
+        return;
+    }
+
+    const horaInicio = document.getElementById("fecha-entrada").value;
+    const horaFin = document.getElementById("fecha-salida").value;
+
+    if (new Date(`1970-01-01T${horaFin}`) <= new Date(`1970-01-01T${horaInicio}`)) {
+        alert("La hora de fin debe ser mayor que la hora de inicio.");
+        return;
+    }
 
     const formData = {
         id_usuario: idUser,
