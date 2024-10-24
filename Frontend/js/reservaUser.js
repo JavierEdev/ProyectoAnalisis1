@@ -35,7 +35,6 @@ selectEntrada.addEventListener("change", function () {
     generarOpcionesSalida(horaInicio);
 });
 
-  // Generar dinámicamente las opciones del select de salida
 function generarOpcionesSalida(horaInicio) {
     const horasDisponibles = [
     "09:00:00", "10:00:00", "11:00:00", "12:00:00", 
