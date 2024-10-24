@@ -28,12 +28,22 @@ class ReservasController {
         Response::send(200, $reservaResponse);
     }
 
+    // public function insertReserva($data) {
+    //     if ($this->reserva->insertar_reserva($data)) {
+    //         Response::send(200, ['message' => 'Reserva insertada']);
+    //     } else {
+    //         // Response::send(500, ['message' => 'Ocurrio un error en el controlador de reserva || Insert Reserva']);
+    //         Response::send(500, ['message' => 'Ya hay una reserva con esa información u Occurrio un error. || Insert Reserva']);
+    //     }
+    // }
+
     public function insertReserva($data) {
-        if ($this->reserva->insertar_reserva($data)) {
-            Response::send(200, ['message' => 'Reserva insertada']);
+        if ($this->reserva->validar_reserva_existente($data)) {
+            Response::send(400, ['message' => 'Ya existe una reserva en ese horario. Por favor, elija otro.']);
+        } else if ($this->reserva->insertar_reserva($data)) {
+            Response::send(200, ['message' => 'Reserva insertada correctamente']);
         } else {
-            // Response::send(500, ['message' => 'Ocurrio un error en el controlador de reserva || Insert Reserva']);
-            Response::send(500, ['message' => 'Ya hay una reserva con esa información u Occurrio un error. || Insert Reserva']);
+            Response::send(500, ['message' => 'Error al insertar la reserva. Intente nuevamente.']);
         }
     }
 
