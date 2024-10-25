@@ -32,7 +32,68 @@ document.addEventListener("DOMContentLoaded", function () {
     })
     .then((result) => {
       console.log(result);
-      populateTable(result);
+
+      // Inicializa DataTables con los datos obtenidos
+      const table = $('#example').DataTable({
+        data: result,
+        columns: [
+          { data: 'usuario' },
+          { data: 'nombre' },
+          { data: 'fecha_reserva' },
+          { data: 'hora_inicio' },
+          { data: 'hora_fin' },
+          {
+            data: 'estado',
+            render: function (data) {
+              return data === 1 ? 'Activa' : 'Inactiva';
+            }
+          },
+          {
+            data: null,
+            render: function (data) {
+              return `
+                <a href="reservasIndividualAdmin.html" class="btn btn-primary btn-sm btn-ver" data-id="${data.id_reservas}">Ver</a>
+                <a href="updateReserva.html" class="btn btn-primary btn-sm btn-ver" data-id="${data.id_reservas}">Editar</a>
+                <a href="#" class="btn btn-primary btn-delete" data-id="${data.id_reservas}" data-estado="${data.estado}">${data.estado === 1 ? 'Desactivar' : 'Activar'}</a>
+              `;
+            }
+          }
+        ],
+        dom: 'Bfrtip',
+        buttons: ['colvis', 'copy', 'csv', 'excel', 'pdf', 'print'],
+        language: {
+          info: 'Mostrando página _PAGE_ de _PAGES_',
+          infoEmpty: 'No hay información disponible',
+          infoFiltered: '(Filtrado de _MAX_ registros totales)',
+          lengthMenu: 'Ver _MENU_ registros por página',
+          zeroRecords: 'No se encontraron registros',
+          search: 'Buscar:',
+          buttons: {
+            colvis: 'Visibilidad Columnas',
+            copy: 'Copiar',
+            csv: 'CSV',
+            excel: 'Excel',
+            pdf: 'PDF',
+            print: 'Imprimir'
+          }
+        },
+        // Configuración del menú para seleccionar "entries per page"
+        lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "Todos"]],
+        pageLength: 10 // Número de registros mostrados por defecto
+      });
+
+      // Delegación de eventos para botones de activar/desactivar
+      $('#example tbody').on('click', '.btn-delete', function(event) {
+        event.preventDefault();
+
+        const idReserva = $(this).data('id');
+        const estadoActual = $(this).data('estado');
+        const nuevoEstado = estadoActual == 1 ? 2 : 1;
+
+        if (confirm(`¿Estás seguro de que deseas ${nuevoEstado == 1 ? "activar" : "desactivar"} esta reserva ID: ${idReserva}?`)) {
+          eliminarReserva(idReserva, nuevoEstado);
+        }
+      });
     })
     .catch((error) => {
       console.error("Error al obtener las reservas:", error);
@@ -40,59 +101,8 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
-function populateTable(data) {
-  const tableBody = document.querySelector("#example tbody");
-  tableBody.innerHTML = "";
-
-  data.forEach((reserva) => {
-    const estadoTexto = reserva.estado === 1 ? "Activa" : "Inactiva";
-    const row = `
-        <tr>
-            <td>${reserva.usuario}</td>
-            <td>${reserva.nombre}</td>
-            <td>${reserva.fecha_reserva}</td>
-            <td>${reserva.hora_inicio}</td>
-            <td>${reserva.hora_fin}</td>
-            <td>${estadoTexto}</td>
-            <td>
-              <a href="reservasIndividualAdmin.html" class="btn btn-primary btn-sm btn-ver" data-id="${reserva.id_reservas}">Ver</a>
-              <a href="updateReserva.html" class="btn btn-primary btn-sm btn-ver" data-id="${reserva.id_reservas}">Editar</a>
-              <a href="#" class="btn btn-primary btn-delete" data-id="${reserva.id_reservas}">Desactivar</a>
-            </td>
-        </tr>
-    `;
-    tableBody.innerHTML += row;
-  });
-
-  const botonesVer = document.querySelectorAll(".btn-ver");
-  botonesVer.forEach((boton) => {
-    boton.addEventListener("click", function (event) {
-      const idReserva = event.target.getAttribute("data-id");
-      localStorage.setItem("idReserva", idReserva);
-    });
-  });
-
-  const botonesEliminar = document.querySelectorAll(".btn-delete");
-  botonesEliminar.forEach((boton) => {
-    boton.addEventListener("click", function (event) {
-      event.preventDefault();
-      const idReserva = event.target.getAttribute("data-id");
-      if (
-        confirm(
-          "¿Estás seguro de que deseas desactivar la reserva id: " +
-            idReserva +
-            "?"
-        )
-      ) {
-        eliminarReserva(idReserva);
-      }
-    });
-  });
-}
-
-function eliminarReserva(idReserva) {
+function eliminarReserva(idReserva, nuevoEstado) {
   const token = localStorage.getItem("token");
-  const idCondo = localStorage.getItem("idCondo");
 
   fetch(
     "http://localhost/ProyectoAnalisis1/Backend/index.php/reservas/deleteReserva",
@@ -102,22 +112,22 @@ function eliminarReserva(idReserva) {
         Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ id_reservas: idReserva }),
+      body: JSON.stringify({ id_reservas: idReserva, nuevo_estado: nuevoEstado })
     }
   )
     .then((response) => {
       if (!response.ok) {
-        throw new Error("Error al desactivar la reserva.");
+        throw new Error("Error al cambiar el estado de la reserva.");
       }
       return response.json();
     })
     .then((result) => {
       console.log(result);
-      alert("Reserva desactiva correctamente");
-      location.reload();
+      alert(`Reserva ${nuevoEstado == 1 ? "activada" : "desactivada"} correctamente`);
+      $('#example').DataTable().ajax.reload();  // Recarga los datos de la tabla
     })
     .catch((error) => {
-      console.error("Error al desactivar la reserva:", error);
-      alert("Error al desactivar la reservao.");
+      console.error("Error al cambiar el estado de la reserva:", error);
+      alert("Error al cambiar el estado de la reserva.");
     });
 }

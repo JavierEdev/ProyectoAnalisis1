@@ -207,7 +207,9 @@ document.addEventListener("DOMContentLoaded", function () {
             excel: 'Excel',
             pdf: 'PDF',
             print: 'Imprimir'
-          }
+          },
+          lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "Todos"]],
+          pageLength: 10 // Número de registros mostrados por defecto
         }
       });
 
