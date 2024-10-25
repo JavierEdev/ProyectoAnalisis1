@@ -123,8 +123,6 @@
 //               alert("Error al cambiar a Inactivo al usuario.");
 //             });
 //         }
-
-
 document.addEventListener("DOMContentLoaded", function () {
   const idUsuario = localStorage.getItem("idUsuario");
   const idCondo = localStorage.getItem("idCondo");
@@ -159,92 +157,108 @@ document.addEventListener("DOMContentLoaded", function () {
     })
     .then((result) => {
       console.log(result);
-      populateTable(result);
+
+      // Inicializa DataTables con los datos obtenidos
+      const table = $('#example').DataTable({
+        data: result,
+        columns: [
+          { data: 'id_usuario' },
+          { data: 'nombre' },
+          { data: 'apellido' },
+          { data: 'email' },
+          { data: 'creado_en' },
+          {
+            data: null, 
+            render: function(data) {
+              return data.rol === 1 ? "Administrador" : data.rol === 2 ? "Colaborador" : "Residente";
+            }
+          },
+          {
+            data: null,
+            render: function(data) {
+              return data.estado === 1 ? "Activo" : "Inactivo";
+            }
+          },
+          {
+            data: null,
+            render: function(data) {
+              const botonTexto = data.estado === 1 ? "Desactivar" : "Activar";
+              return `
+                <a href="usuarioIndividualAdmin.html" class="btn btn-primary btn-sm btn-ver" data-id="${data.id_usuario}">Ver</a>
+                <a href="updateUsuario.html" class="btn btn-primary btn-sm btn-ver" data-id="${data.id_usuario}">Editar</a>
+                <a href="#" class="btn btn-primary btn-delete" data-id="${data.id_usuario}" data-estado="${data.estado}">${botonTexto}</a>
+              `;
+            }
+          }
+        ],
+        dom: 'Bfrtip',
+        buttons: ['colvis', 'copy', 'csv', 'excel', 'pdf', 'print'],
+        language: {
+          info: 'Mostrando página _PAGE_ de _PAGES_',
+          infoEmpty: 'No hay información disponible',
+          infoFiltered: '(Filtrado de _MAX_ registros totales)',
+          lengthMenu: 'Ver _MENU_ registros por página',
+          zeroRecords: 'No se encontraron registros',
+          search: 'Buscar:',
+          buttons: {
+            colvis: 'Visibilidad Columnas',
+            copy: 'Copiar',
+            csv: 'CSV',
+            excel: 'Excel',
+            pdf: 'PDF',
+            print: 'Imprimir'
+          }
+        }
+      });
+
+      // Delegación de eventos para botones de activar/desactivar
+      $('#example tbody').on('click', '.btn-delete', function(event) {
+        event.preventDefault();
+
+        const idUsuario = $(this).data('id');
+        const estadoUsuario = $(this).data('estado');
+        const nuevoEstado = estadoUsuario == 1 ? 2 : 1;
+
+        if (confirm(`¿Estás seguro de que deseas ${nuevoEstado == 1 ? "activar" : "desactivar"} al usuario con ID: ${idUsuario}?`)) {
+          eliminarUsuario(idUsuario, nuevoEstado);
+        }
+      });
     })
     .catch((error) => {
-      console.error("Error al obtener los usuario:", error);
-      alert("Error al obtener los usuario.");
+      console.error("Error al obtener los usuarios:", error);
+      alert("Error al obtener los usuarios.");
     });
 });
 
-function populateTable(data) {
-  const tableBody = document.querySelector("#example tbody");
-  tableBody.innerHTML = "";
+// Función para eliminar o cambiar el estado del usuario
+function eliminarUsuario(idUsuario, nuevoEstado) {
+  const token = localStorage.getItem("token");
 
-  data.forEach((usuario) => {
-    const estadoTexto = usuario.estado === 1 ? "Activo" : "Inactivo";  
-    const rolTexto = usuario.rol === 1 ? "Administrador": usuario.rol === 2 ? "Colaborador": "Residente";
-    const botonTexto = usuario.estado === 1 ? "Desactivar" : "Activar";
-
-    const row = `
-      
-              <tr>
-                  <td>${usuario.id_usuario}</td>
-                  <td>${usuario.nombre}</td>
-                  <td>${usuario.apellido}</td>
-                  <td>${usuario.email}</td>
-                  <td>${usuario.creado_en}</td>
-                  <td>${rolTexto}</td>
-                  <td>${estadoTexto}</td>
-                  <td>
-                      <a href="usuarioIndividualAdmin.html" class="btn btn-primary btn-sm btn-ver" data-id="${usuario.id_usuario}">Ver</a>
-                      <a href="updateUsuario.html" class="btn btn-primary btn-sm btn-ver" data-id="${usuario.id_usuario}">Editar</a>
-                      <a href="#" class="btn btn-primary btn-delete" data-id="${usuario.id_usuario}" data-estado="${usuario.estado}">${botonTexto}</a>
-                  </td>
-              </tr>
-          `;
-          tableBody.innerHTML += row;
-        });
-      
-        const botonesVer = document.querySelectorAll(".btn-ver");
-        botonesVer.forEach((boton) => {
-          boton.addEventListener("click", function (event) {
-            const idRegistro = event.target.getAttribute("data-id");
-            localStorage.setItem("idRegistro", idRegistro);
-          });
-        });
-      
-        const botonesEliminar = document.querySelectorAll(".btn-delete");
-        botonesEliminar.forEach((boton) => {
-            boton.addEventListener("click", function (event) {
-                event.preventDefault();
-                const idUsuario = event.target.getAttribute("data-id");
-                const estadoUsuario = event.target.getAttribute("data-estado");
-                const nuevoEstado = estadoUsuario == 1 ? 2 : 1;
-                if (confirm(`¿Estás seguro de que deseas ${nuevoEstado == 1 ? "activar" : "desactivar"} usuario con ID: ${idUsuario}?`)) {
-                  eliminarUsuario(idUsuario, nuevoEstado);
-                }
-            });
-        });
+  fetch(
+    "http://localhost/ProyectoAnalisis1/Backend/index.php/auth/register",
+    {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ id: idUsuario, estado: nuevoEstado })
+    }
+  )
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Error al cambiar el estado del usuario.");
       }
-      
-      function eliminarUsuario(idUsuario, nuevoEstado) {
-        const token = localStorage.getItem("token");
-      
-        fetch(
-          "http://localhost/ProyectoAnalisis1/Backend/index.php/auth/register",
-          {
-            method: "DELETE",
-            headers: {
-              Authorization: `Bearer ${token}`,
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ id: idUsuario, estado: nuevoEstado })
-          }
-        )
-          .then((response) => {
-            if (!response.ok) {
-              throw new Error("Error al cambiar el estado del usuario.");
-            }
-            return response.json();
-          })
-          .then((result) => {
-            console.log(result);
-            alert(`Usuario ${nuevoEstado == 1 ? "activado" : "desactivado"} correctamente`);
-            location.reload();
-          })
-          .catch((error) => {
-            console.error("Error al cambiar el estado del usuario:", error);
-            alert("Error al cambiar el estado del usuario.");
-          });
-      }
+      return response.json();
+    })
+    .then((result) => {
+      console.log(result);
+      alert(`Usuario ${nuevoEstado == 1 ? "activado" : "desactivado"} correctamente`);
+      $('#example').DataTable().ajax.reload();  // Recarga los datos de la tabla
+    })
+    .catch((error) => {
+      console.error("Error al cambiar el estado del usuario:", error);
+      alert("Error al cambiar el estado del usuario.");
+    });
+}
+   
