@@ -6,11 +6,6 @@ document.addEventListener("DOMContentLoaded", function () {
   const token = localStorage.getItem("token");
 
   if (token) {
-    console.log("Id_Usuario:", idUsuario);
-    console.log("Id_Condo:", idCondo);
-    console.log("Usuario:", userName);
-    console.log("Id_Rol:", id_Rol);
-    console.log("Token:", token);
     document.getElementById("username").textContent = userName;
   } else {
     console.log("No se encontró el nombre de usuario en localStorage");
@@ -31,9 +26,6 @@ document.addEventListener("DOMContentLoaded", function () {
       return response.json();
     })
     .then((result) => {
-      console.log(result);
-
-      // Inicializa DataTables con los datos obtenidos
       const table = $('#example').DataTable({
         data: result,
         columns: [
@@ -77,12 +69,20 @@ document.addEventListener("DOMContentLoaded", function () {
             print: 'Imprimir'
           }
         },
-        // Configuración del menú para seleccionar "entries per page"
         lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "Todos"]],
-        pageLength: 10 // Número de registros mostrados por defecto
+        pageLength: 10
       });
 
-      // Delegación de eventos para botones de activar/desactivar
+      // Delegación de eventos para botones "Ver" y "Editar"
+      $('#example tbody').on('click', '.btn-ver', function(event) {
+        event.preventDefault();
+        const idReserva = $(this).data('id');
+        localStorage.setItem('idReserva', idReserva);  // Almacena el ID en localStorage
+        const href = $(this).attr('href'); // Obtiene la URL de redirección
+        window.location.href = href; // Redirige a la página de destino
+      });
+
+      // Delegación de eventos para activar/desactivar
       $('#example tbody').on('click', '.btn-delete', function(event) {
         event.preventDefault();
 
@@ -91,7 +91,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const nuevoEstado = estadoActual == 1 ? 2 : 1;
 
         if (confirm(`¿Estás seguro de que deseas ${nuevoEstado == 1 ? "activar" : "desactivar"} esta reserva ID: ${idReserva}?`)) {
-          eliminarReserva(idReserva, nuevoEstado);
+          cambiarEstadoReserva(idReserva, nuevoEstado, table, $(this).closest('tr'));
         }
       });
     })
@@ -101,20 +101,18 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
-function eliminarReserva(idReserva, nuevoEstado) {
+// Función para cambiar el estado de la reserva
+function cambiarEstadoReserva(idReserva, nuevoEstado, table, rowElement) {
   const token = localStorage.getItem("token");
 
-  fetch(
-    "http://localhost/ProyectoAnalisis1/Backend/index.php/reservas/deleteReserva",
-    {
-      method: "DELETE",
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ id_reservas: idReserva, nuevo_estado: nuevoEstado })
-    }
-  )
+  fetch("http://localhost/ProyectoAnalisis1/Backend/index.php/reservas/deleteReserva", {
+    method: "DELETE",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ id_reservas: idReserva, nuevo_estado: nuevoEstado })
+  })
     .then((response) => {
       if (!response.ok) {
         throw new Error("Error al cambiar el estado de la reserva.");
@@ -122,9 +120,11 @@ function eliminarReserva(idReserva, nuevoEstado) {
       return response.json();
     })
     .then((result) => {
-      console.log(result);
       alert(`Reserva ${nuevoEstado == 1 ? "activada" : "desactivada"} correctamente`);
-      $('#example').DataTable().ajax.reload();  // Recarga los datos de la tabla
+
+      const rowData = table.row(rowElement).data();
+      rowData.estado = nuevoEstado;
+      table.row(rowElement).data(rowData).draw(false);
     })
     .catch((error) => {
       console.error("Error al cambiar el estado de la reserva:", error);
