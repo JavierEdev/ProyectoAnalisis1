@@ -138,7 +138,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     },
                     { 
                         data: null,
-                        title: 'Acciones',
+                        title: 'QR',
                         render: function (data) {
                             return `<button class="btn btn-primary btn-qr" data-reserva='${JSON.stringify(data)}'>QR</button>`;
                         }
