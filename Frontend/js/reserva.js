@@ -45,7 +45,7 @@ document.addEventListener("DOMContentLoaded", function () {
             render: function (data) {
               return `
                 <a href="reservasIndividualAdmin.html" class="btn btn-primary btn-sm btn-ver" data-id="${data.id_reservas}">Ver</a>
-                <a href="updateReserva.html" class="btn btn-primary btn-sm btn-ver" data-id="${data.id_reservas}">Editar</a>
+                <a href="updateReserva.html" class="btn btn-primary btn-sm btn-editar" data-id="${data.id_reservas}">Editar</a>
                 <a href="#" class="btn btn-primary btn-delete" data-id="${data.id_reservas}" data-estado="${data.estado}">${data.estado === 1 ? 'Desactivar' : 'Activar'}</a>
               `;
             }
@@ -74,7 +74,7 @@ document.addEventListener("DOMContentLoaded", function () {
       });
 
       // Delegación de eventos para botones "Ver" y "Editar"
-      $('#example tbody').on('click', '.btn-ver', function(event) {
+      $('#example tbody').on('click', '.btn-ver, .btn-editar', function(event) {
         event.preventDefault();
         const idReserva = $(this).data('id');
         localStorage.setItem('idReserva', idReserva);  // Almacena el ID en localStorage
