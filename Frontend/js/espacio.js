@@ -1,4 +1,3 @@
-
 document.addEventListener("DOMContentLoaded", function () {
   const idUsuario = localStorage.getItem("idUsuario");
   const idCondo = localStorage.getItem("idCondo");
@@ -51,7 +50,7 @@ document.addEventListener("DOMContentLoaded", function () {
               const botonTexto = data.estado === 1 ? 'Deshabilitar' : 'Activar';
               return `
                 <a href="espaciosIndividualAdmin.html" class="btn btn-primary btn-sm btn-ver" data-id="${data.id_espacio}">Ver</a>
-                <a href="updateEspacio.html" class="btn btn-primary btn-sm btn-ver" data-id="${data.id_espacio}">Editar</a>
+                <a href="updateEspacio.html" class="btn btn-primary btn-sm btn-editar" data-id="${data.id_espacio}">Editar</a>
                 <a href="#" class="btn btn-primary btn-sm btn-delete" data-id="${data.id_espacio}" data-estado="${data.estado}">${botonTexto}</a>
               `;
             }
@@ -79,6 +78,16 @@ document.addEventListener("DOMContentLoaded", function () {
         pageLength: 10
       });
 
+      // Delegación de eventos para los botones "Ver" y "Editar"
+      $('#example tbody').on('click', '.btn-ver, .btn-editar', function(event) {
+        event.preventDefault();
+        const idEspacio = $(this).data('id');
+        localStorage.setItem('idEspacio', idEspacio);  // Almacena el ID en localStorage
+        const href = $(this).attr('href'); // Obtiene la URL de redirección
+        window.location.href = href; // Redirige a la página de destino
+      });
+
+      // Delegación de eventos para el botón de activar/desactivar
       $('#example tbody').on('click', '.btn-delete', function(event) {
         event.preventDefault();
 
@@ -97,10 +106,9 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
+// Función para cambiar el estado del espacio
 function cambiarEstadoEspacio(idEspacio, nuevoEstado, table, rowElement) {
   const token = localStorage.getItem("token");
-
-  console.log("Enviando estado:", { id_espacio: idEspacio, nuevo_estado: nuevoEstado });
 
   fetch("http://localhost/ProyectoAnalisis1/Backend/index.php/espacios/deleteIdEspacio", {
     method: "DELETE",
@@ -117,7 +125,6 @@ function cambiarEstadoEspacio(idEspacio, nuevoEstado, table, rowElement) {
       return response.json();
     })
     .then((result) => {
-      console.log(result);
       alert(`Espacio ${nuevoEstado == 1 ? "activado" : "deshabilitado"} correctamente`);
 
       const rowData = table.row(rowElement).data();
@@ -129,5 +136,3 @@ function cambiarEstadoEspacio(idEspacio, nuevoEstado, table, rowElement) {
       alert("Error al cambiar el estado del espacio.");
     });
 }
-
-
